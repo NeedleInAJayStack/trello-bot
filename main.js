@@ -12,18 +12,18 @@ const port = 3000;
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  serverHeader = "Started: $serverStartTime.toDateString() $serverStartTime.toTimeString()\n";
+  serverHeader = "Started: "+serverStartTime.toDateString()+" "+serverStartTime.toTimeString()+"\n";
   res.end(serverHeader+httpLog);
 });
 
 server.listen(port, hostname, () => {
-  console.log("Server running at http:/$hostname:$port/");
+  console.log("Server running at http://"+hostname+":"+port+"/");
 });
 
 // Adds the specified message to the top of the http log.
 var httpLogAdd = function(toAdd){
   var date = new Date();
-  httpLog = "$date.toDateString() $date.toTimeString(): "+ toAdd + httpLog; // Add it to the top.
+  httpLog = date.toDateString()+" "+date.toTimeString()+": "+ toAdd + httpLog; // Add it to the top.
 };
 
 // TRELLO
@@ -35,7 +35,7 @@ var botTrello = new trello(trelloDevKey, jaysTrelloBotToken); // Connect to Trel
 // This function tries to find the card to be created by name. If it doesn't exist, it creates it. If it does, but in 
 // a different list, it moves it, and if it exists in the same list, it is commented on.
 var staticScheduleCardFunc = function(newCard) {
-  botTrello.get('/1/boards/$lifeBoardId/cards/', function(err, data) {
+  botTrello.get('/1/boards/'+lifeBoardId+'/cards/', function(err, data) {
     if (err) throw err;
     
     var existingCard = null;
@@ -45,20 +45,20 @@ var staticScheduleCardFunc = function(newCard) {
     if(existingCard === null) { // Create the new card
       botTrello.post('/1/cards/', newCard, function(err, data) {
         if (err) throw err;
-        httpLogAdd('"$newCard.name" created successfully. \n');
+        httpLogAdd('"'+newCard.name+'" created successfully. \n');
       });
     }
     else if(existingCard.idList !== newCard.idList) { // Move existing one into the right list
-      botTrello.put('/1/cards/$existingCard.id/idList/', {value: newCard.idList}, function(err, data) {
+      botTrello.put('/1/cards/'+existingCard.id+'/idList/', {value: newCard.idList}, function(err, data) {
         if (err) throw err;
-        httpLogAdd('"$existingCard.name" moved successfully. \n');
+        httpLogAdd('"'+existingCard.name+'" moved successfully. \n');
       });
     }
     else { // In this case, it's already there. Just comment.
       var comment = "Schedule hit again.";
-      botTrello.post('/1/cards/$existingCard.id/actions/comments/', {text: comment}, function(err, data) {
+      botTrello.post('/1/cards/'+existingCard.id+'/actions/comments/', {text: comment}, function(err, data) {
         if (err) throw err;
-        httpLogAdd('"$existingCard.name" commented with "$comment". \n');
+        httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'". \n');
       });
     }
   });
