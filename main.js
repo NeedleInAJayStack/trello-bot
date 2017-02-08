@@ -89,28 +89,34 @@ var freegalCard = {
 };
 var waterPlantsCard = {
   name: "Water Plants",
-  cronSchedule: "0 0 18 * * 3", // Weekly on Wednesday at 6PM
+  cronSchedule: "0 18 * * 2", // Weekly on Tuesday at 6PM
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var moneyReviewCard = {
   name: "Monthly Money Review",
-  cronSchedule: "0 0 18 28 * *", // Monthly on the 28th at 6PM
+  cronSchedule: "0 18 28 * *", // Monthly on the 28th at 6PM
   desc: "Review your monthly spending in GnuCash.",
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var payRentCard = {
   name: "Pay Rent",
-  cronSchedule: "0 0 18 1 * *", // Monthly on the 1st at 6PM
+  cronSchedule: "0 18 1 * *", // Monthly on the 1st at 6PM
   desc: "Pay rent to Chris.",
+  idList: toDoListId,
+  idLabels: [nodeJsLabelId, homeLabelId]
+};
+var washClothesCard = {
+  name: "Wash Clothes",
+  cronSchedule: "0 18 * * 3", // Weekly on Wednesday at 6PM
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 // TODO move washSheetsCard to a dynamic type once I figure out how to monitor for "done".
 var washSheetsCard = {
   name: "Wash Sheets",
-  cronSchedule: "0 0 18 6 * *", // Monthly on the 6th at 6PM
+  cronSchedule: "0 18 7 * 3", // Monthly on the 7th at 6PM
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
@@ -125,6 +131,7 @@ var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticSched
 var waterPlantsTask = cron.schedule(waterPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterPlantsCard);});
 var moneyReviewTask = cron.schedule(moneyReviewCard.cronSchedule, function(){staticScheduleCardFunc(moneyReviewCard);});
 var payRentTask = cron.schedule(payRentCard.cronSchedule, function(){staticScheduleCardFunc(payRentCard);});
+var washClothesTask = cron.schedule(washClothesCard.cronSchedule, function(){staticScheduleCardFunc(washClothesCard);});
 var washSheetsTask = cron.schedule(washSheetsCard.cronSchedule, function(){staticScheduleCardFunc(washSheetsCard);});
 
 // TESTING
