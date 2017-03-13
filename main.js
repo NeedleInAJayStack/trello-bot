@@ -113,10 +113,22 @@ var washClothesCard = {
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
-// TODO move washSheetsCard to a dynamic type once I figure out how to monitor for "done".
 var washSheetsCard = {
   name: "Wash Sheets",
-  cronSchedule: "0 18 7 * 3", // Monthly on the 7th at 6PM
+  cronSchedule: "0 18 1-7 * 3", // Monthly on the 1st Wednesday at 6PM
+  idList: toDoListId,
+  idLabels: [nodeJsLabelId, homeLabelId]
+};
+// TODO move cards below to a dynamic type once I figure out how to monitor for "done".
+var cleanRoomCard = {
+  name: "Clean Room",
+  cronSchedule: "0 12 1-7,15-21 * 7", // Every 1st and 3rd week on Sunday at noon
+  idList: toDoListId,
+  idLabels: [nodeJsLabelId, homeLabelId]
+};
+var vacuumRoomCard = {
+  name: "Vacuum Room",
+  cronSchedule: "0 12 1-7 * 7", // Monthly on the 1st Sunday at noon
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
@@ -126,13 +138,15 @@ var dynamicCards = [];
 
 
 // CARD CREATION
-// Static cards (assume they were deleted after they were finished.)
+// Static cards
 var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticScheduleCardFunc(freegalCard);});
 var waterPlantsTask = cron.schedule(waterPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterPlantsCard);});
 var moneyReviewTask = cron.schedule(moneyReviewCard.cronSchedule, function(){staticScheduleCardFunc(moneyReviewCard);});
 var payRentTask = cron.schedule(payRentCard.cronSchedule, function(){staticScheduleCardFunc(payRentCard);});
 var washClothesTask = cron.schedule(washClothesCard.cronSchedule, function(){staticScheduleCardFunc(washClothesCard);});
 var washSheetsTask = cron.schedule(washSheetsCard.cronSchedule, function(){staticScheduleCardFunc(washSheetsCard);});
+var cleanRoomTask = cron.schedule(cleanRoomCard.cronSchedule, function(){staticScheduleCardFunc(cleanRoomCard);});
+var vacuumRoomTask = cron.schedule(vacuumRoomCard.cronSchedule, function(){staticScheduleCardFunc(vacuumRoomCard);});
 
 // TESTING
 
