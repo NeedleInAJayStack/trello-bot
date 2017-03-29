@@ -6,14 +6,19 @@ var serverHeader = "";
 var httpLog = "";
 
 // Create a simple server
-const hostname = '127.0.0.1';
+const hostname = '0.0.0.0';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  serverHeader = "Started: "+serverStartTime.toDateString()+" "+serverStartTime.toTimeString()+"\n";
-  res.end(serverHeader+httpLog);
+  if(req.method === 'GET') {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    serverHeader = "Started: "+serverStartTime.toDateString()+" "+serverStartTime.toTimeString()+"\n";
+    res.end(serverHeader+httpLog);
+  }
+  else {
+    res.statusCode = 405;
+  }
 });
 
 server.listen(port, hostname, () => {
