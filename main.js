@@ -56,14 +56,18 @@ var staticScheduleCardFunc = function(newCard) {
     else if(existingCard.idList !== newCard.idList) { // Move existing one into the right list
       botTrello.put('/1/cards/'+existingCard.id+'/idList/', {value: newCard.idList}, function(err, data) {
         if (err) throw err;
-        httpLogAdd('"'+existingCard.name+'" moved successfully. \n');
+        botTrello.put('/1/cards/'+existingCard.id+'/pos/', {value: 'top'}, function(err, data) {
+          httpLogAdd('"'+existingCard.name+'" moved successfully. \n');
+        });
       });
     }
     else { // In this case, it's already there. Just comment.
       var comment = "Schedule hit again.";
       botTrello.post('/1/cards/'+existingCard.id+'/actions/comments/', {text: comment}, function(err, data) {
         if (err) throw err;
-        httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'". \n');
+        botTrello.put('/1/cards/'+existingCard.id+'/pos/', {value: 'top'}, function(err, data) {
+          httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'". \n');
+        });
       });
     }
   });
