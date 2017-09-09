@@ -26,7 +26,7 @@ server.listen(port, hostname, () => {
 });
 
 // Adds the specified message to the top of the http log.
-var httpLogAdd = function(toAdd){
+var httpLogAdd = function(date, toAdd){
   var date = new Date();
   httpLog = date.toDateString()+" "+date.toTimeString()+": "+ toAdd + httpLog; // Add it to the top.
 };
@@ -40,37 +40,40 @@ var botTrello = new trello(trelloDevKey, jaysTrelloBotToken); // Connect to Trel
 // This function tries to find the card to be created by name. If it doesn't exist, it creates it. If it does, but in 
 // a different list, it moves it, and if it exists in the same list, it is commented on.
 var staticScheduleCardFunc = function(newCard) {
-  botTrello.get('/1/boards/'+lifeBoardId+'/cards/', function(err, data) {
-    if (err) throw err;
-    
-    var existingCard = null;
-    data.forEach(function(card, array, index) { // Find if one with the same name exists
-      if(card.name === newCard.name) existingCard = card; // Match up cards by name.
+  var date = new Date();
+  if(newCard.dayRange === undefined || newCard.dayRange.includes(date.getDate())) { // Only proceed if dayRange is undefined or today is within the range.
+    botTrello.get('/1/boards/'+lifeBoardId+'/cards/', function(err, data) {
+      if (err) throw err;
+
+      var existingCard = null;
+      data.forEach(function(card, array, index) { // Find if one with the same name exists
+        if(card.name === newCard.name) existingCard = card; // Match up cards by name.
+      });
+      if(existingCard === null) { // Create the new card
+        botTrello.post('/1/cards/', newCard, function(err, data) {
+          if (err) throw err;
+          httpLogAdd('"'+newCard.name+'" created successfully. \n');
+        });
+      }
+      else if(existingCard.idList !== newCard.idList) { // Move existing one into the right list
+        botTrello.put('/1/cards/'+existingCard.id+'/idList/', {value: newCard.idList}, function(err, data) {
+          if (err) throw err;
+          botTrello.put('/1/cards/'+existingCard.id+'/pos/', {value: 'top'}, function(err, data) {
+            httpLogAdd('"'+existingCard.name+'" moved successfully. \n');
+          });
+        });
+      }
+      else { // In this case, it's already there. Just comment.
+        var comment = "Schedule hit again.";
+        botTrello.post('/1/cards/'+existingCard.id+'/actions/comments/', {text: comment}, function(err, data) {
+          if (err) throw err;
+          botTrello.put('/1/cards/'+existingCard.id+'/pos/', {value: 'top'}, function(err, data) {
+            httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'". \n');
+          });
+        });
+      }
     });
-    if(existingCard === null) { // Create the new card
-      botTrello.post('/1/cards/', newCard, function(err, data) {
-        if (err) throw err;
-        httpLogAdd('"'+newCard.name+'" created successfully. \n');
-      });
-    }
-    else if(existingCard.idList !== newCard.idList) { // Move existing one into the right list
-      botTrello.put('/1/cards/'+existingCard.id+'/idList/', {value: newCard.idList}, function(err, data) {
-        if (err) throw err;
-        botTrello.put('/1/cards/'+existingCard.id+'/pos/', {value: 'top'}, function(err, data) {
-          httpLogAdd('"'+existingCard.name+'" moved successfully. \n');
-        });
-      });
-    }
-    else { // In this case, it's already there. Just comment.
-      var comment = "Schedule hit again.";
-      botTrello.post('/1/cards/'+existingCard.id+'/actions/comments/', {text: comment}, function(err, data) {
-        if (err) throw err;
-        botTrello.put('/1/cards/'+existingCard.id+'/pos/', {value: 'top'}, function(err, data) {
-          httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'". \n');
-        });
-      });
-    }
-  });
+  }
 };
 
 // IDS
@@ -87,9 +90,10 @@ var computerLabelId = "571be6f6b0dfecc6d104b358";
 
 // Cards
 // Static cards: These cards are scheduled for the same time, regardless of when I accomplish them.
+// Relevant card parameters are defined according to Trello post method: https://developers.trello.com/v1.0/reference#cards-2
 var freegalCard = {
   name: "Download Freegal Music",
-  cronSchedule: "0 0 18 * * 1", // Weekly on Monday at 6PM
+  cronSchedule: "0 18 * * 1", // Weekly on Monday at 6PM
   desc: "Download music from Freegal \n \n"+
     "Freegal: http://slcpl.freegalmusic.com/homes/index \n"+
     "Music: https://trello.com/c/Ah8avhIc/14-audio",
@@ -124,20 +128,23 @@ var washClothesCard = {
 };
 var washSheetsCard = {
   name: "Wash Sheets",
-  cronSchedule: "0 18 1-7 * 3", // Monthly on the 1st Wednesday at 6PM
+  cronSchedule: "0 18 * * 3", // Monthly on the 1st Wednesday at 6PM
+  dayRange: [0,1,2,3,4,5,6],
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 // TODO move cards below to a dynamic type once I figure out how to monitor for "done".
 var cleanRoomCard = {
   name: "Clean Room",
-  cronSchedule: "0 12 1-7,15-21 * 7", // Every 1st and 3rd week on Sunday at noon
+  cronSchedule: "0 12 * * 7", // Every 1st and 3rd week on Sunday at noon
+  dayRange: [0,1,2,3,4,5,6, 14,15,16,17,18,19,20],
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var vacuumRoomCard = {
   name: "Vacuum Room",
-  cronSchedule: "0 12 1-7 * 7", // Monthly on the 1st Sunday at noon
+  cronSchedule: "0 12 * * 7", // Monthly on the 1st Sunday at noon
+  dayRange: [0,1,2,3,4,5,6],
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
