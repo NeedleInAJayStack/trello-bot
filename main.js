@@ -37,7 +37,7 @@ const jaysTrelloBotToken = process.env.TRELLO_BOT_TOKEN; // This is the bot's to
 var botTrello = new trello(trelloDevKey, jaysTrelloBotToken); // Connect to Trello
 
 
-// This function tries to find the card to be created by name. If it doesn't exist, it creates it. If it does, but in 
+// This function tries to find the card to be created by name. If it doesn't exist, it creates it. If it does, but in
 // a different list, it moves it, and if it exists in the same list, it is commented on.
 var staticScheduleCardFunc = function(newCard) {
   var date = new Date();
@@ -184,4 +184,3 @@ var vacuumRoomTask = cron.schedule(vacuumRoomCard.cronSchedule, function(){stati
 //    });
 //  });
 //};
-
