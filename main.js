@@ -95,14 +95,13 @@ var computerLabelId = "571be6f6b0dfecc6d104b358";
 var payRentCard = {
   name: "Pay Rent",
   cronSchedule: "0 18 1 * *", // Monthly on the 1st at 6PM
-  desc: "Pay rent to Chris.",
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var moneyReviewCard = {
   name: "Monthly Money Review",
   cronSchedule: "0 18 28 * *", // Monthly on the 28th at 6PM
-  desc: "Review your monthly spending in GnuCash.",
+  desc: "Review your monthly spending in GnuCash",
   idList: toDoListId,
   idLabels: [nodeJsLabelId, homeLabelId]
 };
@@ -128,27 +127,34 @@ var freegalCard = {
   idList: toDoListId,
   idLabels: [nodeJsLabelId, mediaLabelId, computerLabelId]
 };
-// var washClothesCard = {
-//   name: "Wash Clothes",
-//   cronSchedule: "0 18 * * 3", // Weekly on Wednesday at 6PM
-//   idList: toDoListId,
-//   idLabels: [nodeJsLabelId, homeLabelId]
-// };
-// var washSheetsCard = {
-//   name: "Wash Sheets",
-//   cronSchedule: "0 18 * * 3", // Monthly on the 1st Wednesday at 6PM
-//   dayRange: [0,1,2,3,4,5,6],
-//   idList: toDoListId,
-//   idLabels: [nodeJsLabelId, homeLabelId]
-// };
+var washClothesCard = {
+  name: "Wash Clothes",
+  cronSchedule: "0 18 * * 3", // Weekly on Wednesday at 6PM
+  idList: toDoListId,
+  idLabels: [nodeJsLabelId, homeLabelId]
+};
+var washSheetsCard = {
+  name: "Wash Sheets",
+  cronSchedule: "0 18 * * 3", // Monthly on the 1st Wednesday at 6PM
+  dayRange: [0,1,2,3,4,5,6],
+  idList: toDoListId,
+  idLabels: [nodeJsLabelId, homeLabelId]
+};
+var trashCanCard = {
+  name: "Take Out Trash",
+  cronSchedule: "0 19 * * 2", // Weekly on Tuesday at 7PM
+  desc: "Take trash cans to the curb",
+  idList: toDoListId,
+  idLabels: [nodeJsLabelId, homeLabelId]
+};
 // TODO move cards below to a dynamic type once I figure out how to monitor for "done".
-// var vacuumRoomCard = {
-//   name: "Vacuum Room",
-//   cronSchedule: "0 12 * * 7", // Monthly on the 1st Sunday at noon
-//   dayRange: [0,1,2,3,4,5,6],
-//   idList: toDoListId,
-//   idLabels: [nodeJsLabelId, homeLabelId]
-// };
+var vacuumRoomCard = {
+  name: "Vacuum Room",
+  cronSchedule: "0 12 * * 7", // Monthly on the 1st Sunday at noon
+  dayRange: [0,1,2,3,4,5,6],
+  idList: toDoListId,
+  idLabels: [nodeJsLabelId, homeLabelId]
+};
 
 // These cards are based on a time-interval from when I last accomplished them.
 var dynamicCards = [];
@@ -161,6 +167,7 @@ var moneyReviewTask = cron.schedule(moneyReviewCard.cronSchedule, function(){sta
 var waterPlantsTask = cron.schedule(waterPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterPlantsCard);});
 var cleanRoomTask = cron.schedule(cleanRoomCard.cronSchedule, function(){staticScheduleCardFunc(cleanRoomCard);});
 var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticScheduleCardFunc(freegalCard);});
+var trashCanTask = cron.schedule(trashCanCard.cronSchedule, function(){staticScheduleCardFunc(trashCanCard);});
 // var washClothesTask = cron.schedule(washClothesCard.cronSchedule, function(){staticScheduleCardFunc(washClothesCard);});
 // var washSheetsTask = cron.schedule(washSheetsCard.cronSchedule, function(){staticScheduleCardFunc(washSheetsCard);});
 // var vacuumRoomTask = cron.schedule(vacuumRoomCard.cronSchedule, function(){staticScheduleCardFunc(vacuumRoomCard);});
