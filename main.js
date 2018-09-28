@@ -42,7 +42,7 @@ var botTrello = new trello(trelloDevKey, jaysTrelloBotToken); // Connect to Trel
 var staticScheduleCardFunc = function(newCard) {
   var date = new Date();
   if(newCard.dayRange === undefined || newCard.dayRange.includes(date.getDate())) { // Only proceed if dayRange is undefined or today is within the range.
-    botTrello.get('/1/boards/'+lifeBoardId+'/cards/', function(err, data) {
+    botTrello.get('/1/boards/'+tasksBoardId+'/cards/', function(err, data) {
       if (err) throw err;
 
       var existingCard = null;
@@ -55,21 +55,17 @@ var staticScheduleCardFunc = function(newCard) {
           httpLogAdd('"'+newCard.name+'" created successfully. \n');
         });
       }
-      else if(existingCard.idList !== newCard.idList) { // Move existing one into the right list
-        botTrello.put('/1/cards/'+existingCard.id+'/idList/', {value: newCard.idList}, function(err, data) {
+      else if(existingCard.idList !== newCard.idList) { // Move card (and update to current definition)
+        botTrello.put('/1/cards/'+existingCard.id, newCard, function(err, data) {
           if (err) throw err;
-          botTrello.put('/1/cards/'+existingCard.id+'/pos/', {value: 'top'}, function(err, data) {
-            httpLogAdd('"'+existingCard.name+'" moved successfully. \n');
-          });
+          httpLogAdd('"'+existingCard.name+'" moved successfully. \n');
         });
       }
       else { // In this case, it's already there. Just comment.
         var comment = "Schedule hit again.";
         botTrello.post('/1/cards/'+existingCard.id+'/actions/comments/', {text: comment}, function(err, data) {
           if (err) throw err;
-          botTrello.put('/1/cards/'+existingCard.id+'/pos/', {value: 'top'}, function(err, data) {
-            httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'". \n');
-          });
+          httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'". \n');
         });
       }
     });
@@ -78,7 +74,7 @@ var staticScheduleCardFunc = function(newCard) {
 
 // IDS
 // Boards
-var lifeBoardId = "54801c047914fe7d632bc4b5";
+var tasksBoardId = "54801c047914fe7d632bc4b5";
 // Lists
 var toDoListId = "57782b97434403f86849e905";
 // Labels
@@ -96,6 +92,7 @@ var payRentCard = {
   name: "Pay Rent",
   cronSchedule: "0 18 1 * *", // Monthly on the 1st at 6PM
   idList: toDoListId,
+  pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var moneyReviewCard = {
@@ -103,12 +100,14 @@ var moneyReviewCard = {
   cronSchedule: "0 18 28 * *", // Monthly on the 28th at 6PM
   desc: "Review your monthly spending in GnuCash",
   idList: toDoListId,
+  pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var waterPlantsCard = {
   name: "Water Plants",
   cronSchedule: "0 18 * * 2", // Weekly on Tuesday at 6PM
   idList: toDoListId,
+  pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var cleanRoomCard = {
@@ -116,6 +115,7 @@ var cleanRoomCard = {
   cronSchedule: "0 12 * * 7", // Every 1st and 3rd week on Sunday at noon
   dayRange: [0,1,2,3,4,5,6, 14,15,16,17,18,19,20],
   idList: toDoListId,
+  pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var freegalCard = {
@@ -125,12 +125,14 @@ var freegalCard = {
     "Freegal: http://slcpl.freegalmusic.com/homes/index \n"+
     "Music: https://trello.com/c/Ah8avhIc/14-audio",
   idList: toDoListId,
+  pos:"top",
   idLabels: [nodeJsLabelId, mediaLabelId, computerLabelId]
 };
 var washClothesCard = {
   name: "Wash Clothes",
   cronSchedule: "0 18 * * 3", // Weekly on Wednesday at 6PM
   idList: toDoListId,
+  pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var washSheetsCard = {
@@ -138,13 +140,23 @@ var washSheetsCard = {
   cronSchedule: "0 18 * * 3", // Monthly on the 1st Wednesday at 6PM
   dayRange: [0,1,2,3,4,5,6],
   idList: toDoListId,
+  pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
-var trashCanCard = {
+var takeOutTrashCard = {
   name: "Take Out Trash",
   cronSchedule: "0 19 * * 2", // Weekly on Tuesday at 7PM
   desc: "Take trash cans to the curb",
   idList: toDoListId,
+  pos:"top",
+  idLabels: [nodeJsLabelId, homeLabelId]
+};
+var bringInTrashCard = {
+  name: "Bring In Trash",
+  cronSchedule: "0 19 * * 3", // Weekly on Wednesday at 7PM
+  desc: "Bring trash cans in from the curb",
+  idList: toDoListId,
+  pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 // TODO move cards below to a dynamic type once I figure out how to monitor for "done".
@@ -153,6 +165,7 @@ var vacuumRoomCard = {
   cronSchedule: "0 12 * * 7", // Monthly on the 1st Sunday at noon
   dayRange: [0,1,2,3,4,5,6],
   idList: toDoListId,
+  pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 
@@ -167,17 +180,18 @@ var moneyReviewTask = cron.schedule(moneyReviewCard.cronSchedule, function(){sta
 var waterPlantsTask = cron.schedule(waterPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterPlantsCard);});
 var cleanRoomTask = cron.schedule(cleanRoomCard.cronSchedule, function(){staticScheduleCardFunc(cleanRoomCard);});
 var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticScheduleCardFunc(freegalCard);});
-var trashCanTask = cron.schedule(trashCanCard.cronSchedule, function(){staticScheduleCardFunc(trashCanCard);});
+var takeOutTrashTask = cron.schedule(takeOutTrashCard.cronSchedule, function(){staticScheduleCardFunc(takeOutTrashCard);});
+var bringInTrashTask = cron.schedule(bringInTrashCard.cronSchedule, function(){staticScheduleCardFunc(bringInTrashCard);});
 // var washClothesTask = cron.schedule(washClothesCard.cronSchedule, function(){staticScheduleCardFunc(washClothesCard);});
 // var washSheetsTask = cron.schedule(washSheetsCard.cronSchedule, function(){staticScheduleCardFunc(washSheetsCard);});
 // var vacuumRoomTask = cron.schedule(vacuumRoomCard.cronSchedule, function(){staticScheduleCardFunc(vacuumRoomCard);});
 
 // TESTING
 
-// Get all node.js cards - This works, but I'm not sure how to use it yet.
+// Get all trello cards.
 //var jsonfile = require('jsonfile');
 //var getNodeCards = function() {
-//  botTrello.get('/1/boards/'+lifeBoardId+'/cards/', function(err, data) {
+//  botTrello.get('/1/boards/'+tasksBoardId+'/cards/', function(err, data) {
 //    if (err) throw err;
 //
 //    var cards = data;
@@ -187,7 +201,7 @@ var trashCanTask = cron.schedule(trashCanCard.cronSchedule, function(){staticSch
 //      if("idLabels" in card) labels = card.idLabels;
 //      if(labels.indexOf(nodeJsLabelId) > -1) nodeCards.push(card); // If not included, indexOf returns -1
 //    });
-//    jsonfile.writeFile('/home/jay/dev/node.js/nodeCards.json', nodeCards,function (err) { // This writes the object to nodeCards.json
+//    jsonfile.writeFile('/home/jay/dev/node.js/nodeCards.json', nodeCards, function (err) { // This writes the object to nodeCards.json
 //      console.error(err);
 //    });
 //  });
