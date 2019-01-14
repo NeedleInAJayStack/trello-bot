@@ -41,7 +41,7 @@ var botTrello = new trello(trelloDevKey, jaysTrelloBotToken); // Connect to Trel
 // a different list, it moves it, and if it exists in the same list, it is commented on.
 var staticScheduleCardFunc = function(newCard) {
   var date = new Date();
-  if(newCard.dayRange === undefined || newCard.dayRange.includes(date.getDate())) { // Only proceed if dayRange is undefined or today is within the range.
+  if(newCard.dayRange === undefined || newCard.dayRange.indexOf(date.getDate()) > -1) { // Only proceed if dayRange is undefined or today is within the range.
     botTrello.get('/1/boards/'+newCard.idBoard+'/cards/', function(err, data) {
       if (err) throw err;
 
@@ -72,7 +72,15 @@ var staticScheduleCardFunc = function(newCard) {
   }
 };
 
-// IDS
+// Monthly date range rules. According to these rules, weeks will occasionally be skipped.
+var firstWeek = [1,2,3,4,5,6,7];
+var secondWeek = [8,9,10,11,12,13,14];
+var thirdWeek = [15,16,17,18,19,20,21];
+var fourthWeek = [22,23,24,25,26,27,28];
+var firstAndThirdWeek = [1,2,3,4,5,6,7, 15,16,17,18,19,20,21];
+var secondAndFourthWeek = [8,9,10,11,12,13,14, 22,23,24,25,26,27,28];
+
+
 // TASKS
 // Boards
 var tasksBoardId = "54801c047914fe7d632bc4b5";
@@ -84,15 +92,7 @@ var homeLabelId = "56fedc7b666a062f88ec113b";
 var mediaLabelId = "54801c0474d650d567a6ecdb";
 var computerLabelId = "571be6f6b0dfecc6d104b358";
 
-// HOUSEKEEPING
-// Boards
-//var tasksBoardId = "54801c047914fe7d632bc4b5";
-// Lists
-//var taskToDoListId = "57782b97434403f86849e905";
-
-
 // Cards
-// Static cards: These cards are scheduled for the same time, regardless of when I accomplish them.
 // Relevant card parameters are defined according to Trello post method: https://developers.trello.com/v1.0/reference#cards-2
 
 var payRentCard = {
@@ -115,7 +115,7 @@ var moneyReviewCard = {
 var cleanRoomCard = {
   name: "Clean Room",
   cronSchedule: "0 12 * * 7", // Every 1st and 3rd week on Sunday at noon
-  dayRange: [0,1,2,3,4,5,6, 14,15,16,17,18,19,20],
+  dayRange: firstAndThirdWeek,
   idBoard: tasksBoardId,
   idList: taskToDoListId,
   pos:"top",
@@ -139,79 +139,89 @@ var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticSched
 
 
 // HOUSEKEEPING
+// Boards
+var housekeepingBoardId = "5c3bdd372d6d6b140cc666cc";
+// Lists
+var housekeepingToDoListId = "5c3be3e55d1701051d84a108";
+// Labels
+var housekeepingScheduledLabelId = "5c3c244581ecf8775c3c470a";
+
+// Cards
 var waterPlantsCard = {
   name: "Water Plants",
   cronSchedule: "0 18 * * 2", // Weekly on Tuesday at 6PM
-  idBoard: tasksBoardId,
-  idList: taskToDoListId,
+  idBoard: housekeepingBoardId,
+  idList: housekeepingToDoListId,
   pos:"top",
-  idLabels: [nodeJsLabelId, homeLabelId]
+  idLabels: [housekeepingScheduledLabelId]
 };
 var washSheetsCard = {
   name: "Wash Sheets",
   cronSchedule: "0 18 * * 3", // Monthly on the 1st Wednesday at 6PM
-  dayRange: [0,1,2,3,4,5,6],
-  idBoard: tasksBoardId,
-  idList: taskToDoListId,
+  dayRange: firstWeek,
+  idBoard: housekeepingBoardId,
+  idList: housekeepingToDoListId,
   pos:"top",
-  idLabels: [nodeJsLabelId, homeLabelId]
+  idLabels: [housekeepingScheduledLabelId]
 };
 var takeOutTrashCard = {
   name: "Take Out Trash",
   desc: "Take trash cans to the curb",
   cronSchedule: "0 19 * * 2", // Weekly on Tuesday at 7PM
-  idBoard: tasksBoardId,
-  idList: taskToDoListId,
+  idBoard: housekeepingBoardId,
+  idList: housekeepingToDoListId,
   pos:"top",
-  idLabels: [nodeJsLabelId, homeLabelId]
+  idLabels: [housekeepingScheduledLabelId]
 };
 var bringInTrashCard = {
   name: "Bring In Trash",
   desc: "Bring trash cans in from the curb",
   cronSchedule: "0 19 * * 3", // Weekly on Wednesday at 7PM
-  idBoard: tasksBoardId,
-  idList: taskToDoListId,
+  idBoard: housekeepingBoardId,
+  idList: housekeepingToDoListId,
   pos:"top",
-  idLabels: [nodeJsLabelId, homeLabelId]
+  idLabels: [housekeepingScheduledLabelId]
 };
 var vacuumCard = {
   name: "Vacuum House",
   desc: "Vacuum the entire house",
   cronSchedule: "0 12 * * 7", // Monthly on the 1st Sunday at noon
-  dayRange: [0,1,2,3,4,5,6],
-  idBoard: tasksBoardId,
-  idList: taskToDoListId,
+  dayRange: firstWeek,
+  idBoard: housekeepingBoardId,
+  idList: housekeepingToDoListId,
   pos:"top",
-  idLabels: [nodeJsLabelId, homeLabelId]
+  idLabels: [housekeepingScheduledLabelId]
 };
 var kitchenCard = {
   name: "Clean Kitchen",
   desc: "Clean kitchen, including mopping.",
   cronSchedule: "0 12 * * 7", // Monthly on the 2nd Sunday at noon
-  dayRange: [7,8,9,10,11,12,13],
-  idBoard: tasksBoardId,
-  idList: taskToDoListId,
+  dayRange: secondWeek,
+  idBoard: housekeepingBoardId,
+  idList: housekeepingToDoListId,
   pos:"top",
-  idLabels: [nodeJsLabelId, homeLabelId]
+  idLabels: [housekeepingScheduledLabelId]
 };
 var bathroomCard = {
   name: "Clean Bathrooms",
   desc: "Clean both bathrooms.",
   cronSchedule: "0 12 * * 7", // Monthly on the 3nd Sunday at noon
-  dayRange: [14,15,16,17,18,19,20],
-  idBoard: tasksBoardId,
-  idList: taskToDoListId,
+  dayRange: thirdWeek,
+  idBoard: housekeepingBoardId,
+  idList: housekeepingToDoListId,
   pos:"top",
-  idLabels: [nodeJsLabelId, homeLabelId]
+  idLabels: [housekeepingScheduledLabelId]
 };
 
 var waterPlantsTask = cron.schedule(waterPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterPlantsCard);});
+var washSheetsTask = cron.schedule(washSheetsCard.cronSchedule, function(){staticScheduleCardFunc(washSheetsCard);});
 var takeOutTrashTask = cron.schedule(takeOutTrashCard.cronSchedule, function(){staticScheduleCardFunc(takeOutTrashCard);});
 var bringInTrashTask = cron.schedule(bringInTrashCard.cronSchedule, function(){staticScheduleCardFunc(bringInTrashCard);});
-var washSheetsTask = cron.schedule(washSheetsCard.cronSchedule, function(){staticScheduleCardFunc(washSheetsCard);});
 var vacuumTask = cron.schedule(vacuumCard.cronSchedule, function(){staticScheduleCardFunc(vacuumCard);});
 var kitchenTask = cron.schedule(kitchenCard.cronSchedule, function(){staticScheduleCardFunc(kitchenCard);});
 var bathroomTask = cron.schedule(bathroomCard.cronSchedule, function(){staticScheduleCardFunc(bathroomCard);});
+
+
 
 // TESTING
 
