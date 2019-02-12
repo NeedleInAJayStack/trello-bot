@@ -124,8 +124,9 @@ var cleanRoomCard = {
 var freegalCard = {
   name: "Download Freegal Music",
   cronSchedule: "0 18 * * 1", // Weekly on Monday at 6PM
-  desc: "Download music from Freegal \n \n"+
-    "Freegal: http://slcpl.freegalmusic.com/homes/index \n"+
+  desc: "Download music from Freegal\n"+
+    "\n"+
+    "Freegal: http://slcpl.freegalmusic.com/homes/index\n"+
     "Music: https://trello.com/c/Ah8avhIc/14-audio",
   idBoard: tasksBoardId,
   idList: taskToDoListId,
@@ -166,7 +167,7 @@ var washSheetsCard = {
 };
 var takeOutTrashCard = {
   name: "Take Out Trash",
-  desc: "Take trash cans to the curb",
+  desc: "Take trash, recycling, and compost cans to the curb",
   cronSchedule: "0 19 * * 2", // Weekly on Tuesday at 7PM
   idBoard: housekeepingBoardId,
   idList: housekeepingToDoListId,
@@ -175,7 +176,7 @@ var takeOutTrashCard = {
 };
 var bringInTrashCard = {
   name: "Bring In Trash",
-  desc: "Bring trash cans in from the curb",
+  desc: "Bring in trash, recycling, and compost cans from the curb",
   cronSchedule: "0 19 * * 3", // Weekly on Wednesday at 7PM
   idBoard: housekeepingBoardId,
   idList: housekeepingToDoListId,
@@ -194,7 +195,13 @@ var vacuumCard = {
 };
 var kitchenCard = {
   name: "Clean Kitchen",
-  desc: "Clean kitchen, including mopping.",
+  desc: "* Wipe countertops\n"+
+    "* Wipe/dust appliances\n"+
+    "* Clean stovetop\n"+
+    "* Clean microwave\n"+
+    "* Clean sink\n"+
+    "* Sweep\n"+
+    "* Mop",
   cronSchedule: "0 12 * * 6", // Monthly on the 2nd Saturday at noon
   dayRange: secondWeek,
   idBoard: housekeepingBoardId,
@@ -204,7 +211,7 @@ var kitchenCard = {
 };
 var bathroomCard = {
   name: "Clean Bathrooms",
-  desc: "Clean both bathrooms.",
+  desc: "Clean both bathrooms",
   cronSchedule: "0 12 * * 6", // Monthly on the 3nd Saturday at noon
   dayRange: thirdWeek,
   idBoard: housekeepingBoardId,
