@@ -82,9 +82,9 @@ var secondAndFourthWeek = [8,9,10,11,12,13,14, 22,23,24,25,26,27,28];
 
 
 // TASKS
-// Boards
+// Board
 var tasksBoardId = "54801c047914fe7d632bc4b5";
-// Lists
+// List
 var taskToDoListId = "57782b97434403f86849e905";
 // Labels
 var nodeJsLabelId = "57d8bb57412839bd591a61c5";
@@ -114,7 +114,7 @@ var moneyReviewCard = {
 };
 var cleanRoomCard = {
   name: "Clean Room",
-  cronSchedule: "0 12 * * 7", // Every 1st and 3rd week on Sunday at noon
+  cronSchedule: "0 12 * * 6", // Every 1st and 3rd week on Saturday at noon
   dayRange: firstAndThirdWeek,
   idBoard: tasksBoardId,
   idList: taskToDoListId,
@@ -139,9 +139,9 @@ var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticSched
 
 
 // HOUSEKEEPING
-// Boards
+// Board
 var housekeepingBoardId = "5c3bdd372d6d6b140cc666cc";
-// Lists
+// List
 var housekeepingToDoListId = "5c3be3e55d1701051d84a108";
 // Labels
 var housekeepingScheduledLabelId = "5c3c244581ecf8775c3c470a";
@@ -183,9 +183,9 @@ var bringInTrashCard = {
   idLabels: [housekeepingScheduledLabelId]
 };
 var vacuumCard = {
-  name: "Vacuum House",
-  desc: "Vacuum the entire house",
-  cronSchedule: "0 12 * * 7", // Monthly on the 1st Sunday at noon
+  name: "Vacuum/Sweep",
+  desc: "Vacuum/sweep the house",
+  cronSchedule: "0 12 * * 6", // Monthly on the 1st Saturday at noon
   dayRange: firstWeek,
   idBoard: housekeepingBoardId,
   idList: housekeepingToDoListId,
@@ -195,7 +195,7 @@ var vacuumCard = {
 var kitchenCard = {
   name: "Clean Kitchen",
   desc: "Clean kitchen, including mopping.",
-  cronSchedule: "0 12 * * 7", // Monthly on the 2nd Sunday at noon
+  cronSchedule: "0 12 * * 6", // Monthly on the 2nd Saturday at noon
   dayRange: secondWeek,
   idBoard: housekeepingBoardId,
   idList: housekeepingToDoListId,
@@ -205,7 +205,7 @@ var kitchenCard = {
 var bathroomCard = {
   name: "Clean Bathrooms",
   desc: "Clean both bathrooms.",
-  cronSchedule: "0 12 * * 7", // Monthly on the 3nd Sunday at noon
+  cronSchedule: "0 12 * * 6", // Monthly on the 3nd Saturday at noon
   dayRange: thirdWeek,
   idBoard: housekeepingBoardId,
   idList: housekeepingToDoListId,
