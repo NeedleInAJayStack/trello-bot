@@ -139,59 +139,67 @@ var cleanRoomTask = cron.schedule(cleanRoomCard.cronSchedule, function(){staticS
 var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticScheduleCardFunc(freegalCard);});
 
 
-// HOUSEKEEPING
+// CHORES
 // Board
-var housekeepingBoardId = "5c3bdd372d6d6b140cc666cc";
+var choresBoardId = "5c3bdd372d6d6b140cc666cc";
 // List
-var housekeepingToDoListId = "5c3be3e55d1701051d84a108";
+var choresToDoListId = "5c3be3e55d1701051d84a108";
 // Labels
-var housekeepingScheduledLabelId = "5c3c244581ecf8775c3c470a";
+var choresScheduledLabelId = "5c3c244581ecf8775c3c470a";
 
 // Cards
 var waterPlantsCard = {
   name: "Water Plants",
   cronSchedule: "0 18 * * 2", // Weekly on Tuesday at 6PM
-  idBoard: housekeepingBoardId,
-  idList: housekeepingToDoListId,
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
   pos:"top",
-  idLabels: [housekeepingScheduledLabelId]
+  idLabels: [choresScheduledLabelId]
+};
+var dogTeethCard = {
+  name: "Brush Gracie's Teeth",
+  cronSchedule: "0 18 * * 1", // Weekly on Monday at 6PM
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
+  pos:"top",
+  idLabels: [choresScheduledLabelId]
 };
 var washSheetsCard = {
   name: "Wash Sheets",
   cronSchedule: "0 18 * * 3", // Monthly on the 1st Wednesday at 6PM
   dayRange: firstWeek,
-  idBoard: housekeepingBoardId,
-  idList: housekeepingToDoListId,
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
   pos:"top",
-  idLabels: [housekeepingScheduledLabelId]
+  idLabels: [choresScheduledLabelId]
 };
 var takeOutTrashCard = {
   name: "Take Out Trash",
   desc: "Take trash, recycling, and compost cans to the curb",
   cronSchedule: "0 19 * * 2", // Weekly on Tuesday at 7PM
-  idBoard: housekeepingBoardId,
-  idList: housekeepingToDoListId,
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
   pos:"top",
-  idLabels: [housekeepingScheduledLabelId]
+  idLabels: [choresScheduledLabelId]
 };
 var bringInTrashCard = {
   name: "Bring In Trash",
   desc: "Bring in trash, recycling, and compost cans from the curb",
   cronSchedule: "0 19 * * 3", // Weekly on Wednesday at 7PM
-  idBoard: housekeepingBoardId,
-  idList: housekeepingToDoListId,
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
   pos:"top",
-  idLabels: [housekeepingScheduledLabelId]
+  idLabels: [choresScheduledLabelId]
 };
 var vacuumCard = {
   name: "Vacuum/Sweep",
   desc: "Vacuum/sweep the house",
   cronSchedule: "0 12 * * 6", // Monthly on the 1st Saturday at noon
   dayRange: firstWeek,
-  idBoard: housekeepingBoardId,
-  idList: housekeepingToDoListId,
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
   pos:"top",
-  idLabels: [housekeepingScheduledLabelId]
+  idLabels: [choresScheduledLabelId]
 };
 var kitchenCard = {
   name: "Clean Kitchen",
@@ -204,23 +212,25 @@ var kitchenCard = {
     "* Mop",
   cronSchedule: "0 12 * * 6", // Monthly on the 2nd Saturday at noon
   dayRange: secondWeek,
-  idBoard: housekeepingBoardId,
-  idList: housekeepingToDoListId,
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
   pos:"top",
-  idLabels: [housekeepingScheduledLabelId]
+  idLabels: [choresScheduledLabelId]
 };
 var bathroomCard = {
   name: "Clean Bathrooms",
   desc: "Clean both bathrooms",
   cronSchedule: "0 12 * * 6", // Monthly on the 3nd Saturday at noon
   dayRange: thirdWeek,
-  idBoard: housekeepingBoardId,
-  idList: housekeepingToDoListId,
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
   pos:"top",
-  idLabels: [housekeepingScheduledLabelId]
+  idLabels: [choresScheduledLabelId]
 };
 
+
 var waterPlantsTask = cron.schedule(waterPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterPlantsCard);});
+var dogTeethTask = cron.schedule(dogTeethCard.cronSchedule, function(){staticScheduleCardFunc(dogTeethCard);});
 var washSheetsTask = cron.schedule(washSheetsCard.cronSchedule, function(){staticScheduleCardFunc(washSheetsCard);});
 var takeOutTrashTask = cron.schedule(takeOutTrashCard.cronSchedule, function(){staticScheduleCardFunc(takeOutTrashCard);});
 var bringInTrashTask = cron.schedule(bringInTrashCard.cronSchedule, function(){staticScheduleCardFunc(bringInTrashCard);});
