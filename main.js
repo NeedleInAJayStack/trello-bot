@@ -185,7 +185,9 @@ var bringInTrashCard = {
 };
 var bedroomCard = {
   name: "Clean Bedroom",
-  desc: "* Pick up clutter\n"+
+  desc: "Check the following and perform as needed:\n"+
+    "\n"+
+    "* Pick up clutter\n"+
     "* Dust\n"+
     "* Sweep/Vacuum",
   cronSchedule: "0 12 * * 6", // Monthly on the 1st Saturday at noon
@@ -197,11 +199,17 @@ var bedroomCard = {
 };
 var kitchenCard = {
   name: "Clean Kitchen",
-  desc: "* Wipe countertops\n"+
+  desc: "Check the following and perform as needed:\n"+
+    "\n"+
+    "* Do dishes\n"+
+    "* Wipe countertops\n"+
+    "* Wipe cupboards\n"+
     "* Wipe/dust appliances\n"+
     "* Clean stovetop\n"+
     "* Clean microwave\n"+
     "* Clean sink\n"+
+    "* Clean fridge\n"+
+    "* Shake rug (outside)\n"+
     "* Sweep/Vacuum\n"+
     "* Mop",
   cronSchedule: "0 12 * * 6", // Monthly on the 2nd Saturday at noon
@@ -213,7 +221,9 @@ var kitchenCard = {
 };
 var bathroomCard = {
   name: "Clean Bathrooms",
-  desc: "* Clean mirrors\n"+
+  desc: "Check the following and perform as needed:\n"+
+    "\n"+
+    "* Clean mirrors\n"+
     "* Clean tub\n"+
     "* Clean sinks\n"+
     "* Clean toilets\n"+
@@ -228,7 +238,9 @@ var bathroomCard = {
 };
 var livingRoomCard = {
   name: "Clean Living Room",
-  desc: "* Pick up clutter\n"+
+  desc: "Check the following and perform as needed:\n"+
+    "\n"+
+    "* Pick up clutter\n"+
     "* Dust\n"+
     "* Clean glass tables\n"+
     "* Sweep/Vacuum",
