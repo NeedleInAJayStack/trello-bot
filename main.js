@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
   if(req.method === 'GET') {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
-    serverHeader = "Started: "+serverStartTime.toDateString()+" "+serverStartTime.toTimeString()+"\n";
+    serverHeader = "Started: "+serverStartTime.toDateString()+" "+serverStartTime.toTimeString()+"\n\n";
     res.end(serverHeader+httpLog);
   }
   else {
@@ -26,9 +26,9 @@ server.listen(port, hostname, () => {
 });
 
 // Adds the specified message to the top of the http log.
-var httpLogAdd = function(date, toAdd){
+var httpLogAdd = function(toAdd){
   var date = new Date();
-  httpLog = date.toDateString()+" "+date.toTimeString()+": "+ toAdd + httpLog; // Add it to the top.
+  httpLog = date.toDateString()+" "+date.toTimeString()+": "+ toAdd + "\n" + httpLog; // Add it to the top.
 };
 
 // TRELLO
@@ -55,18 +55,20 @@ var staticScheduleCardFunc = function(newCard) {
           httpLogAdd('"'+newCard.name+'" created successfully. \n');
         });
       }
-      else if(existingCard.idList !== newCard.idList) { // Move card (and update to current definition)
-        botTrello.put('/1/cards/'+existingCard.id, newCard, function(err, data) {
-          if (err) throw err;
-          httpLogAdd('"'+existingCard.name+'" moved successfully. \n');
-        });
-      }
-      else { // In this case, it's already there. Just comment.
-        var comment = "Schedule hit again.";
-        botTrello.post('/1/cards/'+existingCard.id+'/actions/comments/', {text: comment}, function(err, data) {
-          if (err) throw err;
-          httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'". \n');
-        });
+      else {
+        if(existingCard.idList !== newCard.idList) { // Move card to the correct list and update to definition
+          botTrello.put('/1/cards/'+existingCard.id, newCard, function(err, data) {
+            if (err) throw err;
+            httpLogAdd('"'+existingCard.name+'" moved successfully. \n');
+          });
+        }
+        else { // In this case, it's already there. Just comment.
+          var comment = "Schedule hit again.";
+          botTrello.post('/1/cards/'+existingCard.id+'/actions/comments/', {text: comment}, function(err, data) {
+            if (err) throw err;
+            httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'". \n');
+          });
+        }
       }
     });
   }
@@ -112,15 +114,6 @@ var moneyReviewCard = {
   pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
-var cleanRoomCard = {
-  name: "Clean Room",
-  cronSchedule: "0 12 * * 6", // Every 1st and 3rd week on Saturday at noon
-  dayRange: firstAndThirdWeek,
-  idBoard: tasksBoardId,
-  idList: taskToDoListId,
-  pos:"top",
-  idLabels: [nodeJsLabelId, homeLabelId]
-};
 var freegalCard = {
   name: "Download Freegal Music",
   cronSchedule: "0 18 * * 1", // Weekly on Monday at 6PM
@@ -135,7 +128,6 @@ var freegalCard = {
 };
 var payRentTask = cron.schedule(payRentCard.cronSchedule, function(){staticScheduleCardFunc(payRentCard);});
 var moneyReviewTask = cron.schedule(moneyReviewCard.cronSchedule, function(){staticScheduleCardFunc(moneyReviewCard);});
-var cleanRoomTask = cron.schedule(cleanRoomCard.cronSchedule, function(){staticScheduleCardFunc(cleanRoomCard);});
 var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticScheduleCardFunc(freegalCard);});
 
 
@@ -191,9 +183,11 @@ var bringInTrashCard = {
   pos:"top",
   idLabels: [choresScheduledLabelId]
 };
-var vacuumCard = {
-  name: "Vacuum/Sweep",
-  desc: "Vacuum/sweep the house",
+var bedroomCard = {
+  name: "Clean Bedroom",
+  desc: "* Pick up clutter\n"+
+    "* Dust\n"+
+    "* Sweep/Vacuum",
   cronSchedule: "0 12 * * 6", // Monthly on the 1st Saturday at noon
   dayRange: firstWeek,
   idBoard: choresBoardId,
@@ -208,7 +202,7 @@ var kitchenCard = {
     "* Clean stovetop\n"+
     "* Clean microwave\n"+
     "* Clean sink\n"+
-    "* Sweep\n"+
+    "* Sweep/Vacuum\n"+
     "* Mop",
   cronSchedule: "0 12 * * 6", // Monthly on the 2nd Saturday at noon
   dayRange: secondWeek,
@@ -219,9 +213,27 @@ var kitchenCard = {
 };
 var bathroomCard = {
   name: "Clean Bathrooms",
-  desc: "Clean both bathrooms",
+  desc: "* Clean mirrors\n"+
+    "* Clean tub\n"+
+    "* Clean sinks\n"+
+    "* Clean toilets\n"+
+    "* Sweep/Vacuum\n"+
+    "* Mop",
   cronSchedule: "0 12 * * 6", // Monthly on the 3nd Saturday at noon
   dayRange: thirdWeek,
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
+  pos:"top",
+  idLabels: [choresScheduledLabelId]
+};
+var livingRoomCard = {
+  name: "Clean Living Room",
+  desc: "* Pick up clutter\n"+
+    "* Dust\n"+
+    "* Clean glass tables\n"+
+    "* Sweep/Vacuum",
+  cronSchedule: "0 12 * * 6", // Monthly on the 4th Saturday at noon
+  dayRange: fourthWeek,
   idBoard: choresBoardId,
   idList: choresToDoListId,
   pos:"top",
@@ -234,9 +246,10 @@ var dogTeethTask = cron.schedule(dogTeethCard.cronSchedule, function(){staticSch
 var washSheetsTask = cron.schedule(washSheetsCard.cronSchedule, function(){staticScheduleCardFunc(washSheetsCard);});
 var takeOutTrashTask = cron.schedule(takeOutTrashCard.cronSchedule, function(){staticScheduleCardFunc(takeOutTrashCard);});
 var bringInTrashTask = cron.schedule(bringInTrashCard.cronSchedule, function(){staticScheduleCardFunc(bringInTrashCard);});
-var vacuumTask = cron.schedule(vacuumCard.cronSchedule, function(){staticScheduleCardFunc(vacuumCard);});
+var bedroomTask = cron.schedule(bedroomCard.cronSchedule, function(){staticScheduleCardFunc(bedroomCard);});
 var kitchenTask = cron.schedule(kitchenCard.cronSchedule, function(){staticScheduleCardFunc(kitchenCard);});
 var bathroomTask = cron.schedule(bathroomCard.cronSchedule, function(){staticScheduleCardFunc(bathroomCard);});
+var livingRoomTask = cron.schedule(livingRoomCard.cronSchedule, function(){staticScheduleCardFunc(livingRoomCard);});
 
 
 
