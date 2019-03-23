@@ -8,11 +8,17 @@
 
 ### Docker
 
-To run with Docker:
+Setup:
 
 1. Install Docker
 2. Pull down image from needleinajaystack/trello-bot
-3. Run: sudo docker run -p 3000:3000 -d --restart=always needleinajaystack/trello-bot
+
+To run:
+  sudo docker run -p 3000:3000 -d --restart=always needleinajaystack/trello-bot
+
+To stop:
+1. Get the Docker container id: sudo docker ps
+2. Stop the container: sudo docker stop <container.id>
 
 
 To build a Docker image:
