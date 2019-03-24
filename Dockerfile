@@ -9,6 +9,10 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
+# Set timezone to Denver (https://serverfault.com/questions/683605/docker-container-time-timezone-will-not-reflect-changes)
+ENV TZ=America/Denver
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN npm install
 
 # Bundle app source
