@@ -126,9 +126,19 @@ var freegalCard = {
   pos:"top",
   idLabels: [nodeJsLabelId, mediaLabelId, computerLabelId]
 };
+var backupCard = {
+  name: "Backup Computer",
+  cronSchedule: "0 18 * * 3", // Weekly on Wednesday at 6PM
+  desc: "Backup desktop configuration and media using Rsync",
+  idBoard: tasksBoardId,
+  idList: taskToDoListId,
+  pos:"top",
+  idLabels: [nodeJsLabelId, computerLabelId]
+};
 var payRentTask = cron.schedule(payRentCard.cronSchedule, function(){staticScheduleCardFunc(payRentCard);});
 var moneyReviewTask = cron.schedule(moneyReviewCard.cronSchedule, function(){staticScheduleCardFunc(moneyReviewCard);});
 var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticScheduleCardFunc(freegalCard);});
+var backupTask = cron.schedule(backupCard.cronSchedule, function(){staticScheduleCardFunc(backupCard);});
 
 
 // CHORES
