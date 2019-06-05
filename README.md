@@ -14,7 +14,7 @@ Setup:
 2. Pull down image from needleinajaystack/trello-bot
 
 To run:
-  sudo docker run -p 3000:3000 -d --restart=always needleinajaystack/trello-bot
+  sudo docker run -p 3333:3333 -d --restart=always needleinajaystack/trello-bot
 
 To stop:
 1. Get the Docker container id: sudo docker ps

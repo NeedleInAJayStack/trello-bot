@@ -7,7 +7,7 @@ var httpLog = "";
 
 // Create a simple server
 const hostname = '0.0.0.0';
-const port = 3000;
+const port = 3333;
 
 const server = http.createServer((req, res) => {
   if(req.method === 'GET') {
