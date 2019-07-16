@@ -166,15 +166,6 @@ var dogTeethCard = {
   pos:"top",
   idLabels: [choresScheduledLabelId]
 };
-var washSheetsCard = {
-  name: "Wash Sheets",
-  cronSchedule: "0 18 * * 3", // Monthly on the 1st Wednesday at 6PM
-  dayRange: firstWeek,
-  idBoard: choresBoardId,
-  idList: choresToDoListId,
-  pos:"top",
-  idLabels: [choresScheduledLabelId]
-};
 var takeOutTrashCard = {
   name: "Take Out Trash",
   desc: "Take trash, recycling, and compost cans to the curb",
@@ -199,6 +190,7 @@ var bedroomCard = {
     "\n"+
     "* Pick up clutter\n"+
     "* Dust\n"+
+    "* Wash sheets\n"+
     "* Sweep/Vacuum",
   cronSchedule: "0 12 * * 6", // Monthly on the 1st Saturday at noon
   dayRange: firstWeek,
@@ -265,7 +257,6 @@ var livingRoomCard = {
 
 var waterPlantsTask = cron.schedule(waterPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterPlantsCard);});
 var dogTeethTask = cron.schedule(dogTeethCard.cronSchedule, function(){staticScheduleCardFunc(dogTeethCard);});
-var washSheetsTask = cron.schedule(washSheetsCard.cronSchedule, function(){staticScheduleCardFunc(washSheetsCard);});
 var takeOutTrashTask = cron.schedule(takeOutTrashCard.cronSchedule, function(){staticScheduleCardFunc(takeOutTrashCard);});
 var bringInTrashTask = cron.schedule(bringInTrashCard.cronSchedule, function(){staticScheduleCardFunc(bringInTrashCard);});
 var bedroomTask = cron.schedule(bedroomCard.cronSchedule, function(){staticScheduleCardFunc(bedroomCard);});
