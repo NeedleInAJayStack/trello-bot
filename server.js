@@ -99,7 +99,7 @@ var computerLabelId = "571be6f6b0dfecc6d104b358";
 
 var payRentCard = {
   name: "Pay Rent",
-  desc: "**Schedule**: Monthly on the 1st at 6PM"
+  desc: "**Schedule**: Monthly on the 1st at 6PM",
   cronSchedule: "0 18 1 * *",
   idBoard: tasksBoardId,
   idList: taskToDoListId,
@@ -159,7 +159,7 @@ var choresScheduledLabelId = "5c3c244581ecf8775c3c470a";
 // Cards
 var dogTeethCard = {
   name: "Brush Gracie's Teeth",
-  desc: "**Schedule**: Weekly on Monday at 6PM"
+  desc: "**Schedule**: Weekly on Monday at 6PM",
   cronSchedule: "0 18 * * 1",
   idBoard: choresBoardId,
   idList: choresToDoListId,
@@ -190,7 +190,7 @@ var bringInTrashCard = {
 };
 var waterIndoorPlantsCard = {
   name: "Water Indoor Plants",
-  desc: "**Schedule**: Weekly on Tuesday at 6PM"
+  desc: "**Schedule**: Weekly on Tuesday at 6PM",
   cronSchedule: "0 18 * * 2",
   idBoard: choresBoardId,
   idList: choresToDoListId,
@@ -199,7 +199,7 @@ var waterIndoorPlantsCard = {
 };
 var waterOutdoorPlantsCard = {
   name: "Water Outdoor Plants",
-  desc: "**Schedule**: Every Sun, Wed, Fri at 8PM from Apr-Oct"
+  desc: "**Schedule**: Every Sun, Wed, Fri at 8PM from Apr-Oct",
   cronSchedule: "0 20 * 4-10 0,3,5",
   idBoard: choresBoardId,
   idList: choresToDoListId,
@@ -208,7 +208,7 @@ var waterOutdoorPlantsCard = {
 };
 var turnCompostCard = {
   name: "Turn Compost",
-  desc: "**Schedule**: Every Saturday at noon"
+  desc: "**Schedule**: Every Saturday at noon",
   cronSchedule: "0 12 * * 6",
   idBoard: choresBoardId,
   idList: choresToDoListId,
