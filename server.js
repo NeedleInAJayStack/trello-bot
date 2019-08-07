@@ -99,7 +99,8 @@ var computerLabelId = "571be6f6b0dfecc6d104b358";
 
 var payRentCard = {
   name: "Pay Rent",
-  cronSchedule: "0 18 1 * *", // Monthly on the 1st at 6PM
+  desc: "**Schedule**: Monthly on the 1st at 6PM"
+  cronSchedule: "0 18 1 * *",
   idBoard: tasksBoardId,
   idList: taskToDoListId,
   pos:"top",
@@ -107,8 +108,10 @@ var payRentCard = {
 };
 var moneyReviewCard = {
   name: "Monthly Money Review",
-  cronSchedule: "0 18 28 * *", // Monthly on the 28th at 6PM
-  desc: "Review your monthly spending in GnuCash",
+  desc: "**Schedule**: Monthly on the 28th at 6PM\n"+
+    "\n"+
+    "Review your monthly spending in GnuCash",
+  cronSchedule: "0 18 28 * *",
   idBoard: tasksBoardId,
   idList: taskToDoListId,
   pos:"top",
@@ -116,11 +119,13 @@ var moneyReviewCard = {
 };
 var freegalCard = {
   name: "Download Freegal Music",
-  cronSchedule: "0 18 * * 1", // Weekly on Monday at 6PM
-  desc: "Download music from Freegal\n"+
+  desc: "**Schedule**: Weekly on Monday at 6PM\n"+
+    "\n"+
+    "Download music from Freegal\n"+
     "\n"+
     "Freegal: http://slcpl.freegalmusic.com/homes/index\n"+
     "Music: https://trello.com/c/Ah8avhIc/14-audio",
+  cronSchedule: "0 18 * * 1",
   idBoard: tasksBoardId,
   idList: taskToDoListId,
   pos:"top",
@@ -128,8 +133,10 @@ var freegalCard = {
 };
 var backupCard = {
   name: "Backup Computer",
-  cronSchedule: "0 18 * * 3", // Weekly on Wednesday at 6PM
-  desc: "Backup desktop configuration and media using Rsync",
+  desc: "**Schedule**: Weekly on Wednesday at 6PM\n"+
+    "\n"+
+    "Backup desktop configuration and media using Rsync",
+  cronSchedule: "0 18 * * 3",
   idBoard: tasksBoardId,
   idList: taskToDoListId,
   pos:"top",
@@ -150,17 +157,10 @@ var choresToDoListId = "5c3be3e55d1701051d84a108";
 var choresScheduledLabelId = "5c3c244581ecf8775c3c470a";
 
 // Cards
-var waterPlantsCard = {
-  name: "Water Plants",
-  cronSchedule: "0 18 * * 2", // Weekly on Tuesday at 6PM
-  idBoard: choresBoardId,
-  idList: choresToDoListId,
-  pos:"top",
-  idLabels: [choresScheduledLabelId]
-};
 var dogTeethCard = {
   name: "Brush Gracie's Teeth",
-  cronSchedule: "0 18 * * 1", // Weekly on Monday at 6PM
+  desc: "**Schedule**: Weekly on Monday at 6PM"
+  cronSchedule: "0 18 * * 1",
   idBoard: choresBoardId,
   idList: choresToDoListId,
   pos:"top",
@@ -168,8 +168,10 @@ var dogTeethCard = {
 };
 var takeOutTrashCard = {
   name: "Take Out Trash",
-  desc: "Take trash, recycling, and compost cans to the curb",
-  cronSchedule: "0 19 * * 2", // Weekly on Tuesday at 7PM
+  desc: "**Schedule**: Weekly on Tuesday at 7PM\n"+
+    "\n"+
+    "Take trash, recycling, and compost cans to the curb",
+  cronSchedule: "0 19 * * 2",
   idBoard: choresBoardId,
   idList: choresToDoListId,
   pos:"top",
@@ -177,8 +179,37 @@ var takeOutTrashCard = {
 };
 var bringInTrashCard = {
   name: "Bring In Trash",
-  desc: "Bring in trash, recycling, and compost cans from the curb",
-  cronSchedule: "0 19 * * 3", // Weekly on Wednesday at 7PM
+  desc: "**Schedule**: Weekly on Wednesday at 7PM\n"+
+    "\n"+
+    "Bring in trash, recycling, and compost cans from the curb",
+  cronSchedule: "0 19 * * 3",
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
+  pos:"top",
+  idLabels: [choresScheduledLabelId]
+};
+var waterIndoorPlantsCard = {
+  name: "Water Indoor Plants",
+  desc: "**Schedule**: Weekly on Tuesday at 6PM"
+  cronSchedule: "0 18 * * 2",
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
+  pos:"top",
+  idLabels: [choresScheduledLabelId]
+};
+var waterOutdoorPlantsCard = {
+  name: "Water Outdoor Plants",
+  desc: "**Schedule**: Every Sun, Wed, Fri at 8PM from Apr-Oct"
+  cronSchedule: "0 20 * 4-10 0,3,5",
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
+  pos:"top",
+  idLabels: [choresScheduledLabelId]
+};
+var turnCompostCard = {
+  name: "Turn Compost",
+  desc: "**Schedule**: Every Saturday at noon"
+  cronSchedule: "0 12 * * 6",
   idBoard: choresBoardId,
   idList: choresToDoListId,
   pos:"top",
@@ -186,13 +217,15 @@ var bringInTrashCard = {
 };
 var bedroomCard = {
   name: "Clean Bedroom",
-  desc: "Check the following and perform as needed:\n"+
+  desc: "**Schedule**: Monthly on the 1st Saturday at noon\n"+
+    "\n"+
+    "Check the following and perform as needed:\n"+
     "\n"+
     "* Pick up clutter\n"+
     "* Dust\n"+
     "* Wash sheets\n"+
     "* Sweep/Vacuum",
-  cronSchedule: "0 12 * * 6", // Monthly on the 1st Saturday at noon
+  cronSchedule: "0 12 * * 6",
   dayRange: firstWeek,
   idBoard: choresBoardId,
   idList: choresToDoListId,
@@ -201,7 +234,9 @@ var bedroomCard = {
 };
 var kitchenCard = {
   name: "Clean Kitchen",
-  desc: "Check the following and perform as needed:\n"+
+  desc: "**Schedule**: Monthly on the 2nd Saturday at noon\n"+
+    "\n"+
+    "Check the following and perform as needed:\n"+
     "\n"+
     "* Do dishes\n"+
     "* Wipe countertops\n"+
@@ -214,7 +249,7 @@ var kitchenCard = {
     "* Shake rug (outside)\n"+
     "* Sweep/Vacuum\n"+
     "* Mop",
-  cronSchedule: "0 12 * * 6", // Monthly on the 2nd Saturday at noon
+  cronSchedule: "0 12 * * 6",
   dayRange: secondWeek,
   idBoard: choresBoardId,
   idList: choresToDoListId,
@@ -223,7 +258,9 @@ var kitchenCard = {
 };
 var bathroomCard = {
   name: "Clean Bathrooms",
-  desc: "Check the following and perform as needed:\n"+
+  desc: "**Schedule**: Monthly on the 3nd Saturday at noon\n"+
+    "\n"+
+    "Check the following and perform as needed:\n"+
     "\n"+
     "* Clean mirrors\n"+
     "* Clean tub\n"+
@@ -231,7 +268,7 @@ var bathroomCard = {
     "* Clean toilets\n"+
     "* Sweep/Vacuum\n"+
     "* Mop",
-  cronSchedule: "0 12 * * 6", // Monthly on the 3nd Saturday at noon
+  cronSchedule: "0 12 * * 6",
   dayRange: thirdWeek,
   idBoard: choresBoardId,
   idList: choresToDoListId,
@@ -240,13 +277,15 @@ var bathroomCard = {
 };
 var livingRoomCard = {
   name: "Clean Living Room",
-  desc: "Check the following and perform as needed:\n"+
+  desc: "**Schedule**: Monthly on the 4th Saturday at noon\n"+
+    "\n"+
+    "Check the following and perform as needed:\n"+
     "\n"+
     "* Pick up clutter\n"+
     "* Dust\n"+
     "* Clean glass tables\n"+
     "* Sweep/Vacuum",
-  cronSchedule: "0 12 * * 6", // Monthly on the 4th Saturday at noon
+  cronSchedule: "0 12 * * 6",
   dayRange: fourthWeek,
   idBoard: choresBoardId,
   idList: choresToDoListId,
@@ -255,10 +294,12 @@ var livingRoomCard = {
 };
 
 
-var waterPlantsTask = cron.schedule(waterPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterPlantsCard);});
 var dogTeethTask = cron.schedule(dogTeethCard.cronSchedule, function(){staticScheduleCardFunc(dogTeethCard);});
 var takeOutTrashTask = cron.schedule(takeOutTrashCard.cronSchedule, function(){staticScheduleCardFunc(takeOutTrashCard);});
 var bringInTrashTask = cron.schedule(bringInTrashCard.cronSchedule, function(){staticScheduleCardFunc(bringInTrashCard);});
+var waterIndoorPlantsTask = cron.schedule(waterIndoorPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterIndoorPlantsCard);});
+var waterOutdoorPlantsTask = cron.schedule(waterOutdoorPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterOutdoorPlantsCard);});
+var turnCompostTask = cron.schedule(turnCompostCard.cronSchedule, function(){staticScheduleCardFunc(turnCompostCard);});
 var bedroomTask = cron.schedule(bedroomCard.cronSchedule, function(){staticScheduleCardFunc(bedroomCard);});
 var kitchenTask = cron.schedule(kitchenCard.cronSchedule, function(){staticScheduleCardFunc(kitchenCard);});
 var bathroomTask = cron.schedule(bathroomCard.cronSchedule, function(){staticScheduleCardFunc(bathroomCard);});
