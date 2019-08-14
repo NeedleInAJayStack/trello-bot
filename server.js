@@ -199,8 +199,10 @@ var waterIndoorPlantsCard = {
 };
 var waterOutdoorPlantsCard = {
   name: "Water Outdoor Plants",
-  desc: "**Schedule**: Every Sun, Wed, Fri at 8PM from Apr-Oct",
-  cronSchedule: "0 20 * 4-10 0,3,5",
+  desc: "**Schedule**: Every Sun, Tues, Wed, Fri at 8PM from Apr-Oct"+
+  "\n"+
+  "Cherry tree should be watered by filling bag once per week, on Sundays.",
+  cronSchedule: "0 20 * 4-10 0,2,3,5",
   idBoard: choresBoardId,
   idList: choresToDoListId,
   pos:"top",
