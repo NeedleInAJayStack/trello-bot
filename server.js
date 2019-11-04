@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
   if(req.method === 'GET') {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
-    serverHeader = "Started: "+serverStartTime.toDateString()+" "+serverStartTime.toTimeString()+"\n\n";
+    serverHeader = "Started: "+serverStartTime.toISOString()+"\n\n";
     res.end(serverHeader+httpLog);
   }
   else {
@@ -28,7 +28,7 @@ server.listen(port, hostname, () => {
 // Adds the specified message to the top of the http log.
 var httpLogAdd = function(toAdd){
   var date = new Date();
-  httpLog = date.toDateString()+" "+date.toTimeString()+": "+ toAdd + "\n" + httpLog; // Add it to the top.
+  httpLog = date.toISOString()+" - "+ toAdd + "\n" + httpLog; // Add it to the top.
 };
 
 // TRELLO
@@ -52,21 +52,21 @@ var staticScheduleCardFunc = function(newCard) {
       if(existingCard === null) { // Create the new card
         botTrello.post('/1/cards/', newCard, function(err, data) {
           if (err) throw err;
-          httpLogAdd('"'+newCard.name+'" created successfully. \n');
+          httpLogAdd('"'+newCard.name+'" created successfully.');
         });
       }
       else {
         if(existingCard.idList !== newCard.idList) { // Move card to the correct list and update to definition
           botTrello.put('/1/cards/'+existingCard.id, newCard, function(err, data) {
             if (err) throw err;
-            httpLogAdd('"'+existingCard.name+'" moved successfully. \n');
+            httpLogAdd('"'+existingCard.name+'" moved successfully.');
           });
         }
         else { // In this case, it's already there. Just comment.
           var comment = "Schedule hit again.";
           botTrello.post('/1/cards/'+existingCard.id+'/actions/comments/', {text: comment}, function(err, data) {
             if (err) throw err;
-            httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'". \n');
+            httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'".');
           });
         }
       }
@@ -159,6 +159,15 @@ var choresScheduledLabelId = "5c3c244581ecf8775c3c470a";
 // Cards
 var dogTeethCard = {
   name: "Brush Gracie's Teeth",
+  desc: "**Schedule**: Weekly on Monday at 6PM",
+  cronSchedule: "0 18 * * 1",
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
+  pos:"top",
+  idLabels: [choresScheduledLabelId]
+};
+var lizardCageCard = {
+  name: "Clean Quincy's Cage",
   desc: "**Schedule**: Weekly on Monday at 6PM",
   cronSchedule: "0 18 * * 1",
   idBoard: choresBoardId,
@@ -297,6 +306,7 @@ var livingRoomCard = {
 
 
 var dogTeethTask = cron.schedule(dogTeethCard.cronSchedule, function(){staticScheduleCardFunc(dogTeethCard);});
+var lizardCageTask = cron.schedule(lizardCageCard.cronSchedule, function(){staticScheduleCardFunc(lizardCageCard);});
 var takeOutTrashTask = cron.schedule(takeOutTrashCard.cronSchedule, function(){staticScheduleCardFunc(takeOutTrashCard);});
 var bringInTrashTask = cron.schedule(bringInTrashCard.cronSchedule, function(){staticScheduleCardFunc(bringInTrashCard);});
 var waterIndoorPlantsTask = cron.schedule(waterIndoorPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterIndoorPlantsCard);});
