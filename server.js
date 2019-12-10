@@ -142,10 +142,22 @@ var backupCard = {
   pos:"top",
   idLabels: [nodeJsLabelId, computerLabelId]
 };
+var feedSourdoughCard = {
+  name: "Feed Sourdough Starter",
+  desc: "**Schedule**: Weekly on Sunday at 6PM\n"+
+    "\n"+
+    "Feed the sourdough starter",
+  cronSchedule: "0 18 * * 0",
+  idBoard: tasksBoardId,
+  idList: taskToDoListId,
+  pos:"top",
+  idLabels: [nodeJsLabelId, homeLabelId]
+};
 var payRentTask = cron.schedule(payRentCard.cronSchedule, function(){staticScheduleCardFunc(payRentCard);});
 var moneyReviewTask = cron.schedule(moneyReviewCard.cronSchedule, function(){staticScheduleCardFunc(moneyReviewCard);});
 var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticScheduleCardFunc(freegalCard);});
 var backupTask = cron.schedule(backupCard.cronSchedule, function(){staticScheduleCardFunc(backupCard);});
+var sourdoughTask = cron.schedule(feedSourdoughCard.cronSchedule, function(){staticScheduleCardFunc(feedSourdoughCard);});
 
 
 // CHORES
