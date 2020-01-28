@@ -117,20 +117,6 @@ var moneyReviewCard = {
   pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
-var freegalCard = {
-  name: "Download Freegal Music",
-  desc: "**Schedule**: Weekly on Monday at 6PM\n"+
-    "\n"+
-    "Download music from Freegal\n"+
-    "\n"+
-    "Freegal: http://slcpl.freegalmusic.com/homes/index\n"+
-    "Music: https://trello.com/c/Ah8avhIc/14-audio",
-  cronSchedule: "0 18 * * 1",
-  idBoard: tasksBoardId,
-  idList: taskToDoListId,
-  pos:"top",
-  idLabels: [nodeJsLabelId, mediaLabelId, computerLabelId]
-};
 var backupCard = {
   name: "Backup Computer",
   desc: "**Schedule**: Weekly on Wednesday at 6PM\n"+
@@ -155,7 +141,6 @@ var feedSourdoughCard = {
 };
 var payRentTask = cron.schedule(payRentCard.cronSchedule, function(){staticScheduleCardFunc(payRentCard);});
 var moneyReviewTask = cron.schedule(moneyReviewCard.cronSchedule, function(){staticScheduleCardFunc(moneyReviewCard);});
-var freegalTask = cron.schedule(freegalCard.cronSchedule, function(){staticScheduleCardFunc(freegalCard);});
 var backupTask = cron.schedule(backupCard.cronSchedule, function(){staticScheduleCardFunc(backupCard);});
 var sourdoughTask = cron.schedule(feedSourdoughCard.cronSchedule, function(){staticScheduleCardFunc(feedSourdoughCard);});
 
