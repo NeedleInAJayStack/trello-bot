@@ -106,6 +106,17 @@ var payRentCard = {
   pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
+var utilitiesCard = {
+  name: "Input Utilities",
+  desc: "**Schedule**: Monthly on the 1st at 6PM\n"+
+  "\n"+
+  "Input utility data into SkySpark",
+  cronSchedule: "0 18 1 * *",
+  idBoard: tasksBoardId,
+  idList: taskToDoListId,
+  pos:"top",
+  idLabels: [nodeJsLabelId, computerLabelId]
+};
 var moneyReviewCard = {
   name: "Monthly Money Review",
   desc: "**Schedule**: Monthly on the 28th at 6PM\n"+
@@ -140,6 +151,7 @@ var feedSourdoughCard = {
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var payRentTask = cron.schedule(payRentCard.cronSchedule, function(){staticScheduleCardFunc(payRentCard);});
+var utilitiesTask = cron.schedule(utilitiesCard.cronSchedule, function(){staticScheduleCardFunc(utilitiesCard);});
 var moneyReviewTask = cron.schedule(moneyReviewCard.cronSchedule, function(){staticScheduleCardFunc(moneyReviewCard);});
 var backupTask = cron.schedule(backupCard.cronSchedule, function(){staticScheduleCardFunc(backupCard);});
 var sourdoughTask = cron.schedule(feedSourdoughCard.cronSchedule, function(){staticScheduleCardFunc(feedSourdoughCard);});
