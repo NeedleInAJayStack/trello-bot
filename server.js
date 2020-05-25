@@ -215,17 +215,17 @@ var waterIndoorPlantsCard = {
   pos:"top",
   idLabels: [choresScheduledLabelId]
 };
-var waterOutdoorPlantsCard = {
-  name: "Water Outdoor Plants",
-  desc: "**Schedule**: Every Sun, Tues, Wed, Fri at 8PM from Apr-Oct"+
-  "\n"+
-  "Cherry tree should be watered by filling bag once per week, on Sundays.",
-  cronSchedule: "0 20 * 4-10 0,2,3,5",
-  idBoard: choresBoardId,
-  idList: choresToDoListId,
-  pos:"top",
-  idLabels: [choresScheduledLabelId]
-};
+// var waterOutdoorPlantsCard = {
+//   name: "Water Outdoor Plants",
+//   desc: "**Schedule**: Every Sun, Tues, Wed, Fri at 8PM from Apr-Oct"+
+//   "\n"+
+//   "Cherry tree should be watered by filling bag once per week, on Sundays.",
+//   cronSchedule: "0 20 * 4-10 0,2,3,5",
+//   idBoard: choresBoardId,
+//   idList: choresToDoListId,
+//   pos:"top",
+//   idLabels: [choresScheduledLabelId]
+// };
 var turnCompostCard = {
   name: "Turn Compost",
   desc: "**Schedule**: Every Saturday at noon",
@@ -319,7 +319,7 @@ var lizardCageTask = cron.schedule(lizardCageCard.cronSchedule, function(){stati
 var takeOutTrashTask = cron.schedule(takeOutTrashCard.cronSchedule, function(){staticScheduleCardFunc(takeOutTrashCard);});
 var bringInTrashTask = cron.schedule(bringInTrashCard.cronSchedule, function(){staticScheduleCardFunc(bringInTrashCard);});
 var waterIndoorPlantsTask = cron.schedule(waterIndoorPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterIndoorPlantsCard);});
-var waterOutdoorPlantsTask = cron.schedule(waterOutdoorPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterOutdoorPlantsCard);});
+// var waterOutdoorPlantsTask = cron.schedule(waterOutdoorPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterOutdoorPlantsCard);});
 var turnCompostTask = cron.schedule(turnCompostCard.cronSchedule, function(){staticScheduleCardFunc(turnCompostCard);});
 var bedroomTask = cron.schedule(bedroomCard.cronSchedule, function(){staticScheduleCardFunc(bedroomCard);});
 var kitchenTask = cron.schedule(kitchenCard.cronSchedule, function(){staticScheduleCardFunc(kitchenCard);});
