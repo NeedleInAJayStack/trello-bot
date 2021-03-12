@@ -91,15 +91,25 @@ var taskToDoListId = "57782b97434403f86849e905";
 // Labels
 var nodeJsLabelId = "57d8bb57412839bd591a61c5";
 var homeLabelId = "56fedc7b666a062f88ec113b";
-var mediaLabelId = "54801c0474d650d567a6ecdb";
 var computerLabelId = "571be6f6b0dfecc6d104b358";
 
 // Cards
 // Relevant card parameters are defined according to Trello post method: https://developers.trello.com/v1.0/reference#cards-2
 
 var payRentCard = {
-  name: "Pay Rent",
+  name: "Pay Rent and Utilities",
   desc: "**Schedule**: Monthly on the 1st at 6PM",
+  cronSchedule: "0 18 1 * *",
+  idBoard: tasksBoardId,
+  idList: taskToDoListId,
+  pos:"top",
+  idLabels: [nodeJsLabelId, homeLabelId]
+};
+var payPhoneCard = {
+  name: "Pay Cell Phone",
+  desc: "**Schedule**: Monthly on the 1st at 6PM\n"+
+        "\n"+
+        "$35 to Mom through PayPal:\n",
   cronSchedule: "0 18 1 * *",
   idBoard: tasksBoardId,
   idList: taskToDoListId,
@@ -128,17 +138,6 @@ var moneyReviewCard = {
   pos:"top",
   idLabels: [nodeJsLabelId, homeLabelId]
 };
-var backupCard = {
-  name: "Backup Computer",
-  desc: "**Schedule**: Weekly on Wednesday at 6PM\n"+
-    "\n"+
-    "Backup desktop configuration and media using Rsync",
-  cronSchedule: "0 18 * * 3",
-  idBoard: tasksBoardId,
-  idList: taskToDoListId,
-  pos:"top",
-  idLabels: [nodeJsLabelId, computerLabelId]
-};
 var feedSourdoughCard = {
   name: "Feed Sourdough Starter",
   desc: "**Schedule**: Weekly on Sunday at 6PM\n"+
@@ -151,9 +150,9 @@ var feedSourdoughCard = {
   idLabels: [nodeJsLabelId, homeLabelId]
 };
 var payRentTask = cron.schedule(payRentCard.cronSchedule, function(){staticScheduleCardFunc(payRentCard);});
+var payPhoneTask = cron.schedule(payPhoneCard.cronSchedule, function(){staticScheduleCardFunc(payPhoneCard);});
 var utilitiesTask = cron.schedule(utilitiesCard.cronSchedule, function(){staticScheduleCardFunc(utilitiesCard);});
 var moneyReviewTask = cron.schedule(moneyReviewCard.cronSchedule, function(){staticScheduleCardFunc(moneyReviewCard);});
-var backupTask = cron.schedule(backupCard.cronSchedule, function(){staticScheduleCardFunc(backupCard);});
 var sourdoughTask = cron.schedule(feedSourdoughCard.cronSchedule, function(){staticScheduleCardFunc(feedSourdoughCard);});
 
 
