@@ -231,6 +231,17 @@ var turnCompostCard = {
   pos:"top",
   idLabels: [choresScheduledLabelId]
 };
+var mealPlanCard = {
+  name: "Meal Plan and Groceries",
+  desc: "**Schedule**: Weekly on Sunday at noon\n"+
+    "\n"+
+    "Plan meals for the week and buy groceries",
+  cronSchedule: "0 12 * * 0",
+  idBoard: choresBoardId,
+  idList: choresToDoListId,
+  pos:"top",
+  idLabels: [choresScheduledLabelId]
+};
 var bedroomCard = {
   name: "Clean Bedroom",
   desc: "**Schedule**: Monthly on the 1st Saturday at noon\n"+
@@ -318,6 +329,7 @@ var waterIndoorPlantsTask = cron.schedule(waterIndoorPlantsCard.cronSchedule, fu
 var waterOutdoorPlantsTask = cron.schedule(waterOutdoorPlantsCard.cronSchedule, function(){staticScheduleCardFunc(waterOutdoorPlantsCard);});
 var mowLawnTask = cron.schedule(mowLawnCard.cronSchedule, function(){staticScheduleCardFunc(mowLawnCard);});
 var turnCompostTask = cron.schedule(turnCompostCard.cronSchedule, function(){staticScheduleCardFunc(turnCompostCard);});
+var mealPlanTask = cron.schedule(mealPlanCard.cronSchedule, function(){staticScheduleCardFunc(mealPlanCard);});
 var bedroomTask = cron.schedule(bedroomCard.cronSchedule, function(){staticScheduleCardFunc(bedroomCard);});
 var kitchenTask = cron.schedule(kitchenCard.cronSchedule, function(){staticScheduleCardFunc(kitchenCard);});
 var bathroomTask = cron.schedule(bathroomCard.cronSchedule, function(){staticScheduleCardFunc(bathroomCard);});
