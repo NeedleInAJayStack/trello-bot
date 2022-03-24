@@ -129,17 +129,6 @@ var tasksCards = [
     idList: taskToDoListId,
     pos:"top",
     idLabels: [nodeJsLabelId, homeLabelId]
-  },
-  {
-    name: "Feed Sourdough Starter",
-    desc: "**Schedule**: Weekly on Sunday at 6PM\n"+
-      "\n"+
-      "Feed the sourdough starter",
-    cronSchedule: "0 18 * * 0",
-    idBoard: tasksBoardId,
-    idList: taskToDoListId,
-    pos:"top",
-    idLabels: [nodeJsLabelId, homeLabelId]
   }
 ]
 tasksCards.forEach( card => {
@@ -207,15 +196,6 @@ var choresCards = [
     idLabels: [choresScheduledLabelId]
   },
   {
-    name: "Water Outdoor Plants",
-    desc: "**Schedule**: Every Sun, Tues, Wed, Fri at 6PM from April through October",
-    cronSchedule: "0 18 * 4-10 0,2,3,5",
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
-    pos:"top",
-    idLabels: [choresScheduledLabelId]
-  },
-  {
     name: "Mow Lawn",
     desc: "**Schedule**: Every Thursday at 6PM from April through October",
     cronSchedule: "0 18 * 4-10 4",
@@ -225,9 +205,11 @@ var choresCards = [
     idLabels: [choresScheduledLabelId]
   },
   {
-    name: "Turn Compost",
-    desc: "**Schedule**: Every Saturday at noon",
-    cronSchedule: "0 12 * * 6",
+    name: "Pool Maintenance",
+    desc: "**Schedule**: Every Saturday at noon from April through October\n"+
+      "\n"+
+      "Perform pool testing, chemical treatments, straining, brushing, and vacuuming",
+    cronSchedule: "0 12 * 4-10 6",
     idBoard: choresBoardId,
     idList: choresToDoListId,
     pos:"top",
