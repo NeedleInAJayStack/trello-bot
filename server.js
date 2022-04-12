@@ -166,10 +166,10 @@ var choresCards = [
   },
   {
     name: "Take Out Trash",
-    desc: "**Schedule**: Weekly on Tuesday at 6PM\n"+
+    desc: "**Schedule**: Weekly on Monday at 6PM\n"+
       "\n"+
       "Take trash, recycling, and compost cans to the curb",
-    cronSchedule: "0 18 * * 2",
+    cronSchedule: "0 18 * * 1",
     idBoard: choresBoardId,
     idList: choresToDoListId,
     pos:"top",
@@ -206,10 +206,10 @@ var choresCards = [
   },
   {
     name: "Pool Maintenance",
-    desc: "**Schedule**: Every Saturday at noon from April through October\n"+
+    desc: "**Schedule**: Every Saturday at noon from May through October\n"+
       "\n"+
       "Perform pool testing, chemical treatments, straining, brushing, and vacuuming",
-    cronSchedule: "0 12 * 4-10 6",
+    cronSchedule: "0 12 * 5-10 6",
     idBoard: choresBoardId,
     idList: choresToDoListId,
     pos:"top",
