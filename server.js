@@ -193,7 +193,7 @@ var choresCards = [
     desc: "**Schedule**: Weekly on Wednesday at 6PM\n"+
       "\n"+
       "Bring in trash, recycling, and compost cans from the curb",
-    cronSchedule: "0 18 * * 3",
+    cronSchedule: "0 18 * * 2",
     idBoard: choresBoardId,
     idList: choresToDoListId,
     pos:"top",
@@ -234,6 +234,17 @@ var choresCards = [
       "\n"+
       "Plan meals for the week and buy groceries",
     cronSchedule: "0 12 * * 0",
+    idBoard: choresBoardId,
+    idList: choresToDoListId,
+    pos:"top",
+    idLabels: [choresScheduledLabelId]
+  },
+  {
+    name: "Water Backyard Garden",
+    desc: "**Schedule**: Weekly on Sunday and Wednesday at 6PM\n"+
+      "\n"+
+      "Water garden near the pool and bamboo",
+    cronSchedule: "0 18 * * 0,3",
     idBoard: choresBoardId,
     idList: choresToDoListId,
     pos:"top",
