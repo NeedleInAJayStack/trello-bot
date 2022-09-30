@@ -87,11 +87,9 @@ var secondAndFourthWeek = [8,9,10,11,12,13,14, 22,23,24,25,26,27,28];
 // Board
 var tasksBoardId = "54801c047914fe7d632bc4b5";
 // List
-var taskToDoListId = "57782b97434403f86849e905";
+var tasksToDoListId = "57782b97434403f86849e905";
 // Labels
-var nodeJsLabelId = "57d8bb57412839bd591a61c5";
-var homeLabelId = "56fedc7b666a062f88ec113b";
-var computerLabelId = "571be6f6b0dfecc6d104b358";
+var tasksScheduledLabelId = "57d8bb57412839bd591a61c5";
 
 // Cards
 // Relevant card parameters are defined according to Trello post method: https://developers.trello.com/v1.0/reference#cards-2
@@ -106,21 +104,21 @@ var tasksCards = [
           "Venmo request $1,460 from Katelyn\n",
     cronSchedule: "0 18 25 * *",
     idBoard: tasksBoardId,
-    idList: taskToDoListId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [nodeJsLabelId, homeLabelId]
+    idLabels: [tasksScheduledLabelId]
   },
-  // {
-  //   name: "Pay Rent and Utilities",
-  //   desc: "**Schedule**: Monthly on the 1st at 6PM\n"+
-  //   "\n"+
-  //   "Input utility data into PostgreSQL",
-  //   cronSchedule: "0 18 1 * *",
-  //   idBoard: tasksBoardId,
-  //   idList: taskToDoListId,
-  //   pos:"top",
-  //   idLabels: [nodeJsLabelId, homeLabelId]
-  // },
+  {
+    name: "Input Utilities",
+    desc: "**Schedule**: Monthly on the 1st at 6PM\n"+
+    "\n"+
+    "Input utility data into PostgreSQL",
+    cronSchedule: "0 18 1 * *",
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos:"top",
+    idLabels: [tasksScheduledLabelId]
+  },
   {
     name: "Pay Cell Phone",
     desc: "**Schedule**: Monthly on the 1st at 6PM\n"+
@@ -128,9 +126,9 @@ var tasksCards = [
           "$35 to Mom through PayPal:\n",
     cronSchedule: "0 18 1 * *",
     idBoard: tasksBoardId,
-    idList: taskToDoListId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [nodeJsLabelId, homeLabelId]
+    idLabels: [tasksScheduledLabelId]
   },
   {
     name: "Monthly Money Review",
@@ -139,83 +137,67 @@ var tasksCards = [
       "Review your monthly spending in GnuCash",
     cronSchedule: "0 18 28 * *",
     idBoard: tasksBoardId,
-    idList: taskToDoListId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [nodeJsLabelId, homeLabelId]
-  }
-]
-tasksCards.forEach( card => {
-  cron.schedule(card.cronSchedule, function(){staticScheduleCardFunc(card);});
-});
-
-
-// CHORES
-// Board
-var choresBoardId = "5c3bdd372d6d6b140cc666cc";
-// List
-var choresToDoListId = "5c3be3e55d1701051d84a108";
-// Labels
-var choresScheduledLabelId = "5c3c244581ecf8775c3c470a";
-
-// Cards
-var choresCards = [
+    idLabels: [tasksScheduledLabelId]
+  },
   {
     name: "Brush Gracie's Teeth",
-    desc: "**Schedule**: Weekly on Monday at 6PM",
-    cronSchedule: "0 18 * * 1",
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
+    desc: "**Schedule**: Weekly on Saturday at noon",
+    cronSchedule: "0 12 * * 6",
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [choresScheduledLabelId]
+    idLabels: [tasksScheduledLabelId]
   },
-  {
-    name: "Clean Quincy's Cage",
-    desc: "**Schedule**: Weekly on Monday at 6PM",
-    cronSchedule: "0 18 * * 1",
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
-    pos:"top",
-    idLabels: [choresScheduledLabelId]
-  },
+  // {
+  //   name: "Clean Quincy's Cage",
+  //   desc: "**Schedule**: Weekly on Monday at 6PM",
+  //   cronSchedule: "0 18 * * 1",
+  //   idBoard: tasksBoardId,
+  //   idList: tasksToDoListId,
+  //   pos:"top",
+  //   idLabels: [tasksScheduledLabelId]
+  // },
   {
     name: "Take Out Trash",
     desc: "**Schedule**: Weekly on Monday at 6PM\n"+
       "\n"+
       "Take trash, recycling, and compost cans to the curb",
     cronSchedule: "0 18 * * 1",
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [choresScheduledLabelId]
+    idLabels: [tasksScheduledLabelId]
   },
   {
     name: "Bring In Trash",
-    desc: "**Schedule**: Weekly on Wednesday at 6PM\n"+
+    desc: "**Schedule**: Weekly on Tuesday at 6PM\n"+
       "\n"+
       "Bring in trash, recycling, and compost cans from the curb",
     cronSchedule: "0 18 * * 2",
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [choresScheduledLabelId]
+    idLabels: [tasksScheduledLabelId]
   },
   {
     name: "Water Indoor Plants",
     desc: "**Schedule**: Weekly on Tuesday at 6PM",
     cronSchedule: "0 18 * * 2",
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [choresScheduledLabelId]
+    idLabels: [tasksScheduledLabelId]
   },
   {
     name: "Mow Lawn",
     desc: "**Schedule**: Every Thursday at 6PM from April through October",
     cronSchedule: "0 18 * 4-10 4",
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [choresScheduledLabelId]
+    idLabels: [tasksScheduledLabelId]
   },
   {
     name: "Pool Maintenance",
@@ -223,74 +205,74 @@ var choresCards = [
       "\n"+
       "Perform pool testing, chemical treatments, straining, brushing, and vacuuming",
     cronSchedule: "0 12 * 5-10 6",
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [choresScheduledLabelId]
+    idLabels: [tasksScheduledLabelId]
   },
-  {
-    name: "Meal Plan and Groceries",
-    desc: "**Schedule**: Weekly on Sunday at noon\n"+
-      "\n"+
-      "Plan meals for the week and buy groceries",
-    cronSchedule: "0 12 * * 0",
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
-    pos:"top",
-    idLabels: [choresScheduledLabelId]
-  },
+  // {
+  //   name: "Meal Plan and Groceries",
+  //   desc: "**Schedule**: Weekly on Sunday at noon\n"+
+  //     "\n"+
+  //     "Plan meals for the week and buy groceries",
+  //   cronSchedule: "0 12 * * 0",
+  //   idBoard: tasksBoardId,
+  //   idList: tasksToDoListId,
+  //   pos:"top",
+  //   idLabels: [tasksScheduledLabelId]
+  // },
   {
     name: "Water Backyard Garden",
-    desc: "**Schedule**: Weekly on Sunday and Wednesday at 6PM\n"+
+    desc: "**Schedule**: Weekly on Sunday and Wednesday at 6PM from April through October\n"+
       "\n"+
       "Water garden near the pool and bamboo",
-    cronSchedule: "0 18 * * 0,3",
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
+    cronSchedule: "0 18 * 4-10 0,3",
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [choresScheduledLabelId]
+    idLabels: [tasksScheduledLabelId]
   },
-  {
-    name: "Clean Bedroom",
-    desc: "**Schedule**: Monthly on the 1st Saturday at noon\n"+
-      "\n"+
-      "Check the following and perform as needed:\n"+
-      "\n"+
-      "* Pick up clutter\n"+
-      "* Dust\n"+
-      "* Wash sheets\n"+
-      "* Sweep/Vacuum",
-    cronSchedule: "0 12 * * 6",
-    dayRange: firstWeek,
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
-    pos:"top",
-    idLabels: [choresScheduledLabelId]
-  },
-  {
-    name: "Clean Kitchen",
-    desc: "**Schedule**: Monthly on the 2nd Saturday at noon\n"+
-      "\n"+
-      "Check the following and perform as needed:\n"+
-      "\n"+
-      "* Do dishes\n"+
-      "* Wipe countertops\n"+
-      "* Wipe cupboards\n"+
-      "* Wipe/dust appliances\n"+
-      "* Clean stovetop\n"+
-      "* Clean microwave\n"+
-      "* Clean sink\n"+
-      "* Clean fridge\n"+
-      "* Shake rug (outside)\n"+
-      "* Sweep/Vacuum\n"+
-      "* Mop",
-    cronSchedule: "0 12 * * 6",
-    dayRange: secondWeek,
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
-    pos:"top",
-    idLabels: [choresScheduledLabelId]
-  },
+  // {
+  //   name: "Clean Bedroom",
+  //   desc: "**Schedule**: Monthly on the 1st Saturday at noon\n"+
+  //     "\n"+
+  //     "Check the following and perform as needed:\n"+
+  //     "\n"+
+  //     "* Pick up clutter\n"+
+  //     "* Dust\n"+
+  //     "* Wash sheets\n"+
+  //     "* Sweep/Vacuum",
+  //   cronSchedule: "0 12 * * 6",
+  //   dayRange: firstWeek,
+  //   idBoard: tasksBoardId,
+  //   idList: tasksToDoListId,
+  //   pos:"top",
+  //   idLabels: [tasksScheduledLabelId]
+  // },
+  // {
+  //   name: "Clean Kitchen",
+  //   desc: "**Schedule**: Monthly on the 2nd Saturday at noon\n"+
+  //     "\n"+
+  //     "Check the following and perform as needed:\n"+
+  //     "\n"+
+  //     "* Do dishes\n"+
+  //     "* Wipe countertops\n"+
+  //     "* Wipe cupboards\n"+
+  //     "* Wipe/dust appliances\n"+
+  //     "* Clean stovetop\n"+
+  //     "* Clean microwave\n"+
+  //     "* Clean sink\n"+
+  //     "* Clean fridge\n"+
+  //     "* Shake rug (outside)\n"+
+  //     "* Sweep/Vacuum\n"+
+  //     "* Mop",
+  //   cronSchedule: "0 12 * * 6",
+  //   dayRange: secondWeek,
+  //   idBoard: tasksBoardId,
+  //   idList: tasksToDoListId,
+  //   pos:"top",
+  //   idLabels: [tasksScheduledLabelId]
+  // },
   {
     name: "Clean Bathrooms",
     desc: "**Schedule**: Monthly on the 3nd Saturday at noon\n"+
@@ -305,10 +287,10 @@ var choresCards = [
       "* Mop",
     cronSchedule: "0 12 * * 6",
     dayRange: thirdWeek,
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [choresScheduledLabelId]
+    idLabels: [tasksScheduledLabelId]
   },
   {
     name: "Clean Living Room",
@@ -322,16 +304,32 @@ var choresCards = [
       "* Sweep/Vacuum",
     cronSchedule: "0 12 * * 6",
     dayRange: fourthWeek,
-    idBoard: choresBoardId,
-    idList: choresToDoListId,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
     pos:"top",
-    idLabels: [choresScheduledLabelId]
+    idLabels: [tasksScheduledLabelId]
+  },
+  {
+    name: "Clean Den",
+    desc: "**Schedule**: Monthly on the 1st Saturday at noon\n"+
+      "\n"+
+      "Check the following and perform as needed:\n"+
+      "\n"+
+      "* Pick up clutter\n"+
+      "* Dust\n"+
+      "* Clean glass tables\n"+
+      "* Sweep/Vacuum",
+    cronSchedule: "0 12 * * 6",
+    dayRange: firstWeek,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos:"top",
+    idLabels: [tasksScheduledLabelId]
   }
 ]
-choresCards.forEach( card => {
+tasksCards.forEach( card => {
   cron.schedule(card.cronSchedule, function(){staticScheduleCardFunc(card);});
 });
-
 
 // TESTING
 
@@ -346,7 +344,7 @@ choresCards.forEach( card => {
 //    cards.forEach(function(card, array, index) { // Find the ones with the node.js label
 //      var labels = [,];
 //      if("idLabels" in card) labels = card.idLabels;
-//      if(labels.indexOf(nodeJsLabelId) > -1) nodeCards.push(card); // If not included, indexOf returns -1
+//      if(labels.indexOf(tasksScheduledLabelId) > -1) nodeCards.push(card); // If not included, indexOf returns -1
 //    });
 //    jsonfile.writeFile('/home/jay/dev/node.js/nodeCards.json', nodeCards, function (err) { // This writes the object to nodeCards.json
 //      console.error(err);
