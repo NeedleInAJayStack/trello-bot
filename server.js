@@ -42,7 +42,7 @@ var botTrello = new trello(trelloDevKey, jaysTrelloBotToken); // Connect to Trel
 var staticScheduleCardFunc = function(newCard) {
   var date = new Date();
   if(newCard.dayRange === undefined || newCard.dayRange.indexOf(date.getDate()) > -1) { // Only proceed if dayRange is undefined or today is within the range.
-    botTrello.get('/1/boards/'+newCard.idBoard+'/cards/', function(err, data) {
+    botTrello.get(`/1/boards/${newCard.idBoard}/cards/`, function(err, data) {
       if (err) throw err;
 
       var existingCard = null;
@@ -50,23 +50,23 @@ var staticScheduleCardFunc = function(newCard) {
         if(card.name === newCard.name) existingCard = card; // Match up cards by name.
       });
       if(existingCard === null) { // Create the new card
-        botTrello.post('/1/cards/', newCard, function(err, data) {
+        botTrello.post(`/1/cards/`, newCard, function(err, data) {
           if (err) throw err;
-          httpLogAdd('"'+newCard.name+'" created successfully.');
+          httpLogAdd(`"${newCard.name}" created successfully`);
         });
       }
       else {
         if(existingCard.idList !== newCard.idList) { // Move card to the correct list and update to definition
-          botTrello.put('/1/cards/'+existingCard.id, newCard, function(err, data) {
+          botTrello.put(`/1/cards/${existingCard.id}`, newCard, function(err, data) {
             if (err) throw err;
-            httpLogAdd('"'+existingCard.name+'" moved successfully.');
+            httpLogAdd(`"${existingCard.name}" moved successfully`);
           });
         }
         else { // In this case, it's already there. Just comment.
           var comment = "Schedule hit again.";
-          botTrello.post('/1/cards/'+existingCard.id+'/actions/comments/', {text: comment}, function(err, data) {
+          botTrello.post(`/1/cards/${existingCard.id}/actions/comments/`, {text: comment}, function(err, data) {
             if (err) throw err;
-            httpLogAdd('"'+existingCard.name+'" commented with "'+comment+'".');
+            httpLogAdd(`"${existingCard.name}" commented with "${comment}"`);
           });
         }
       }
