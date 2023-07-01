@@ -85,11 +85,11 @@ var secondAndFourthWeek = [8,9,10,11,12,13,14, 22,23,24,25,26,27,28];
 
 // TASKS
 // Board
-var tasksBoardId = "54801c047914fe7d632bc4b5";
+var tasksBoardId = "649fc332c93c2d7139afa8c0";
 // List
-var tasksToDoListId = "57782b97434403f86849e905";
+var tasksToDoListId = "649fc332c93c2d7139afa8c7";
 // Labels
-var tasksScheduledLabelId = "57d8bb57412839bd591a61c5";
+var tasksScheduledLabelId = "649fc333c93c2d7139afab7f";
 
 // Cards
 // Relevant card parameters are defined according to Trello post method: https://developers.trello.com/v1.0/reference#cards-2
@@ -330,24 +330,3 @@ var tasksCards = [
 tasksCards.forEach( card => {
   cron.schedule(card.cronSchedule, function(){staticScheduleCardFunc(card);});
 });
-
-// TESTING
-
-// Get all trello cards.
-//var jsonfile = require('jsonfile');
-//var getNodeCards = function() {
-//  botTrello.get('/1/boards/'+tasksBoardId+'/cards/', function(err, data) {
-//    if (err) throw err;
-//
-//    var cards = data;
-//    var nodeCards = [];
-//    cards.forEach(function(card, array, index) { // Find the ones with the node.js label
-//      var labels = [,];
-//      if("idLabels" in card) labels = card.idLabels;
-//      if(labels.indexOf(tasksScheduledLabelId) > -1) nodeCards.push(card); // If not included, indexOf returns -1
-//    });
-//    jsonfile.writeFile('/home/jay/dev/node.js/nodeCards.json', nodeCards, function (err) { // This writes the object to nodeCards.json
-//      console.error(err);
-//    });
-//  });
-//};
