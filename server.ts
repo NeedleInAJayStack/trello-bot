@@ -1,6 +1,7 @@
-const http = require('http')
-const cron = require('node-cron') // Doc here: https://www.npmjs.com/package/node-cron
-const Trello = require('node-trello') // Doc here: https://www.npmjs.com/package/node-trello
+import http = require('http')
+import cron = require('node-cron') // Doc here: https://www.npmjs.com/package/node-cron
+import Trello = require('node-trello') // Doc here: https://www.npmjs.com/package/node-trello
+
 const serverStartTime = new Date()
 let serverHeader = ''
 let httpLog = ''
@@ -25,7 +26,7 @@ server.listen(port, hostname, () => {
 })
 
 // Adds the specified message to the top of the http log.
-const httpLogAdd = function (toAdd) {
+const httpLogAdd = (toAdd): void => {
   const date = new Date()
   httpLog = date.toISOString() + ' - ' + toAdd + '\n' + httpLog // Add it to the top.
 }
@@ -35,36 +36,43 @@ const trelloDevKey = process.env.TRELLO_DEV_KEY
 const jaysTrelloBotToken = process.env.TRELLO_BOT_TOKEN // This is the bot's token.
 const botTrello = new Trello(trelloDevKey, jaysTrelloBotToken) // Connect to Trello
 
+interface Card {
+  id: string
+  name: string
+  idList: string[]
+}
+
 // This function tries to find the card to be created by name. If it doesn't exist, it creates it. If it does, but in
 // a different list, it moves it, and if it exists in the same list, it is commented on.
-const staticScheduleCardFunc = function (newCard) {
+const staticScheduleCardFunc = (newCard): void => {
   const date = new Date()
   if (newCard.dayRange === undefined || newCard.dayRange.indexOf(date.getDate()) > -1) { // Only proceed if dayRange is undefined or today is within the range.
-    botTrello.get(`/1/boards/${newCard.idBoard}/cards/`, function (err, data) {
-      if (err) throw err
+    botTrello.get(`/1/boards/${newCard.idBoard}/cards/`, function (err: Error | undefined, data: Card[]) {
+      if (err != null) throw err
 
-      let existingCard = null
+      let existingCard: Card | undefined
       data.forEach(function (card, array, index) { // Find if one with the same name exists
         if (card.name === newCard.name) existingCard = card // Match up cards by name.
       })
-      if (existingCard === null) { // Create the new card
-        botTrello.post('/1/cards/', newCard, function (err, data) {
-          if (err) throw err
-          httpLogAdd(`"${newCard.name}" created successfully`)
-        })
-      } else {
+      if (existingCard != null) {
+        const cardName = existingCard.name
         if (existingCard.idList !== newCard.idList) { // Move card to the correct list and update to definition
-          botTrello.put(`/1/cards/${existingCard.id}`, newCard, function (err, data) {
-            if (err) throw err
-            httpLogAdd(`"${existingCard.name}" moved successfully`)
+          botTrello.put(`/1/cards/${existingCard.id}`, newCard, (err: Error | undefined): void => {
+            if (err != null) throw err
+            httpLogAdd(`"${cardName}" moved successfully`)
           })
         } else { // In this case, it's already there. Just comment.
           const comment = 'Schedule hit again.'
-          botTrello.post(`/1/cards/${existingCard.id}/actions/comments/`, { text: comment }, function (err, data) {
-            if (err) throw err
-            httpLogAdd(`"${existingCard.name}" commented with "${comment}"`)
+          botTrello.post(`/1/cards/${existingCard.id}/actions/comments/`, { text: comment }, (err: Error | undefined): void => {
+            if (err != null) throw err
+            httpLogAdd(`"${cardName}" commented with "${comment}"`)
           })
         }
+      } else { // Create the new card
+        botTrello.post('/1/cards/', newCard, function (err: Error | undefined, data) {
+          if (err != null) throw err
+          httpLogAdd(`"${newCard.name}" created successfully`)
+        })
       }
     })
   }
@@ -323,5 +331,5 @@ const tasksCards = [
   }
 ]
 tasksCards.forEach(card => {
-  cron.schedule(card.cronSchedule, function () { staticScheduleCardFunc(card) })
+  cron.schedule(card.cronSchedule, () => { staticScheduleCardFunc(card) })
 })

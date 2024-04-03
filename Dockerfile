@@ -13,11 +13,14 @@ COPY package*.json ./
 ENV TZ=America/Denver
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN npm install
+RUN npm install && \
+    npm install -g typescript
 
 # Bundle app source
 COPY . .
 
+RUN tsc
+
 EXPOSE 3333
 
-CMD [ "npm", "start" ]
+CMD [ "node", "./dist/server.js" ]
