@@ -10,8 +10,8 @@
   "private": true,
   "scripts": {
     "build": "npx tsc",
-    "lint": "./node_modules/.bin/eslint ./*.js",
-    "lint:fix": "./node_modules/.bin/eslint ./*.js --fix"
+    "lint": "./node_modules/.bin/eslint ./*.ts",
+    "lint:fix": "./node_modules/.bin/eslint ./*.ts --fix"
   },
   "dependencies": {
     "node-cron": "*",
