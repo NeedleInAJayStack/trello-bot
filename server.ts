@@ -36,7 +36,7 @@ const trelloDevKey = process.env.TRELLO_DEV_KEY
 const jaysTrelloBotToken = process.env.TRELLO_BOT_TOKEN // This is the bot's token.
 const botTrello = new Trello(trelloDevKey, jaysTrelloBotToken) // Connect to Trello
 
-interface Card {
+export interface Card {
   id: string
   name: string
   idList: string[]
@@ -178,7 +178,8 @@ const tasksCards = [
     desc: '**Schedule**: Weekly on Tuesday at 6PM\n' +
       '\n' +
       'Bring in trash, recycling, and compost cans from the curb',
-    cronSchedule: '0 18 * * 2',
+    // cronSchedule: '0 18 * * 2',
+    cronSchedule: '*/2 * * * *',
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
     pos: 'top',
