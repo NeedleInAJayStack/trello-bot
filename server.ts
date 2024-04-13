@@ -2,11 +2,9 @@ import http = require('http')
 import cron = require('node-cron') // Doc here: https://www.npmjs.com/package/node-cron
 import axios = require('axios')
 
-const httpClient = axios.default
-
+// HTTP SERVER
 const serverStartTime = new Date()
-let serverHeader = ''
-let httpLog = ''
+let httpLog = 'Started: ' + serverStartTime.toISOString() + '\n\n'
 
 // Create a simple server
 const hostname = '0.0.0.0'
@@ -16,8 +14,7 @@ const server = http.createServer((req, res) => {
   if (req.method === 'GET') {
     res.statusCode = 200
     res.setHeader('Content-Type', 'text/plain')
-    serverHeader = 'Started: ' + serverStartTime.toISOString() + '\n\n'
-    res.end(serverHeader + httpLog)
+    res.end(httpLog)
   } else {
     res.statusCode = 405
   }
@@ -51,6 +48,7 @@ interface Card {
   idList: string[]
 }
 
+const httpClient = axios.default
 const axoisConfig = {
   params: {
     key: trelloDevKey,
