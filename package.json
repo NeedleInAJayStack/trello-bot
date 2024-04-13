@@ -7,7 +7,6 @@
     "type": "git",
     "url": "https://gitlab.com/NeedleInAJayStack/homeNodejsServer.git"
   },
-  "type": "module",
   "private": true,
   "scripts": {
     "build": "npx tsc",
@@ -15,8 +14,8 @@
     "lint:fix": "./node_modules/.bin/eslint ./*.ts --fix"
   },
   "dependencies": {
-    "node-cron": "*",
-    "node-trello": "*"
+    "axios": "^1.6.8",
+    "node-cron": "*"
   },
   "devDependencies": {
     "@types/node": "^20.12.3",

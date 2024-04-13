@@ -1,6 +1,8 @@
 import http = require('http')
 import cron = require('node-cron') // Doc here: https://www.npmjs.com/package/node-cron
-import Trello = require('node-trello') // Doc here: https://www.npmjs.com/package/node-trello
+import axios = require('axios')
+
+const httpClient = axios.default
 
 const serverStartTime = new Date()
 let serverHeader = ''
@@ -26,55 +28,56 @@ server.listen(port, hostname, () => {
 })
 
 // Adds the specified message to the top of the http log.
-const httpLogAdd = (toAdd): void => {
+const httpLogAdd = (toAdd: string): void => {
   const date = new Date()
-  httpLog = date.toISOString() + ' - ' + toAdd + '\n' + httpLog // Add it to the top.
+  const log = date.toISOString() + ' - ' + toAdd + '\n'
+  console.log(log)
+  httpLog = log + httpLog // Add it to the top.
 }
 
 // TRELLO
 const trelloDevKey = process.env.TRELLO_DEV_KEY
 const jaysTrelloBotToken = process.env.TRELLO_BOT_TOKEN // This is the bot's token.
-const botTrello = new Trello(trelloDevKey, jaysTrelloBotToken) // Connect to Trello
 
-export interface Card {
+interface Card {
   id: string
   name: string
   idList: string[]
 }
 
+const axoisConfig = {
+  params: {
+    key: trelloDevKey,
+    token: jaysTrelloBotToken
+  }
+}
+
 // This function tries to find the card to be created by name. If it doesn't exist, it creates it. If it does, but in
 // a different list, it moves it, and if it exists in the same list, it is commented on.
-const staticScheduleCardFunc = (newCard): void => {
+const staticScheduleCardFunc = async (newCard): Promise<void> => {
   const date = new Date()
   if (newCard.dayRange === undefined || newCard.dayRange.indexOf(date.getDate()) > -1) { // Only proceed if dayRange is undefined or today is within the range.
-    botTrello.get(`/1/boards/${newCard.idBoard}/cards/`, function (err: Error | undefined, data: Card[]) {
-      if (err != null) throw err
+    const cardsRes = await httpClient.get(`https://api.trello.com/1/boards/${newCard.idBoard}/cards/`, axoisConfig)
+    const cards: Card[] = cardsRes.data
 
-      let existingCard: Card | undefined
-      data.forEach(function (card, array, index) { // Find if one with the same name exists
-        if (card.name === newCard.name) existingCard = card // Match up cards by name.
-      })
-      if (existingCard != null) {
-        const cardName = existingCard.name
-        if (existingCard.idList !== newCard.idList) { // Move card to the correct list and update to definition
-          botTrello.put(`/1/cards/${existingCard.id}`, newCard, (err: Error | undefined): void => {
-            if (err != null) throw err
-            httpLogAdd(`"${cardName}" moved successfully`)
-          })
-        } else { // In this case, it's already there. Just comment.
-          const comment = 'Schedule hit again.'
-          botTrello.post(`/1/cards/${existingCard.id}/actions/comments/`, { text: comment }, (err: Error | undefined): void => {
-            if (err != null) throw err
-            httpLogAdd(`"${cardName}" commented with "${comment}"`)
-          })
-        }
-      } else { // Create the new card
-        botTrello.post('/1/cards/', newCard, function (err: Error | undefined, data) {
-          if (err != null) throw err
-          httpLogAdd(`"${newCard.name}" created successfully`)
-        })
-      }
+    let existingCard: Card | undefined
+    cards.forEach(function (card) { // Find if one with the same name exists
+      if (card.name === newCard.name) existingCard = card // Match up cards by name.
     })
+    if (existingCard != null) {
+      const cardName = existingCard.name
+      if (existingCard.idList !== newCard.idList) { // Move card to the correct list and update to definition
+        await httpClient.put(`https://api.trello.com/1/cards/${existingCard.id}`, newCard, axoisConfig)
+        httpLogAdd(`"${cardName}" moved successfully`)
+      } else { // In this case, it's already there. Just comment.
+        const comment = 'Schedule hit again.'
+        await httpClient.post(`https://api.trello.com/1/cards/${existingCard.id}/actions/comments/`, { text: comment }, axoisConfig)
+        httpLogAdd(`"${cardName}" commented with "${comment}"`)
+      }
+    } else { // Create the new card
+      await httpClient.post('https://api.trello.com/1/cards/', newCard, axoisConfig)
+      httpLogAdd(`"${newCard.name}" created successfully`)
+    }
   }
 }
 
@@ -178,8 +181,7 @@ const tasksCards = [
     desc: '**Schedule**: Weekly on Tuesday at 6PM\n' +
       '\n' +
       'Bring in trash, recycling, and compost cans from the curb',
-    // cronSchedule: '0 18 * * 2',
-    cronSchedule: '*/2 * * * *',
+    cronSchedule: '0 18 * * 2',
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
     pos: 'top',
@@ -331,6 +333,13 @@ const tasksCards = [
     idLabels: [tasksScheduledLabelId]
   }
 ]
+
 tasksCards.forEach(card => {
-  cron.schedule(card.cronSchedule, () => { staticScheduleCardFunc(card) })
+  cron.schedule(card.cronSchedule, async () => {
+    try {
+      await staticScheduleCardFunc(card)
+    } catch (error) {
+      console.error(error)
+    }
+  })
 })
