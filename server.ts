@@ -37,7 +37,13 @@ const httpLogAdd = (toAdd: string): void => {
 
 // TRELLO
 const trelloDevKey = process.env.TRELLO_DEV_KEY
+if (trelloDevKey === undefined || trelloDevKey === '') {
+  throw new Error('TRELLO_DEV_KEY is not set.')
+}
 const jaysTrelloBotToken = process.env.TRELLO_BOT_TOKEN // This is the bot's token.
+if (jaysTrelloBotToken === undefined || jaysTrelloBotToken === '') {
+  throw new Error('TRELLO_BOT_TOKEN is not set.')
+}
 
 interface Card {
   id: string
