@@ -174,7 +174,7 @@ const tasksCards = [
     desc: '**Schedule**: Weekly on Monday at 6PM\n' +
       '\n' +
       'Take trash, recycling, and compost cans to the curb',
-    cronSchedule: '0 18 * * 1',
+    cronSchedule: '0 18 * * 0',
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
     pos: 'top',
