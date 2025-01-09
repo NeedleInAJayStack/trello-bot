@@ -181,17 +181,6 @@ const tasksCards = [
     idLabels: [tasksScheduledLabelId]
   },
   {
-    name: 'Bring In Trash',
-    desc: '**Schedule**: Weekly on Tuesday at 6PM\n' +
-      '\n' +
-      'Bring in trash, recycling, and compost cans from the curb',
-    cronSchedule: '0 18 * * 2',
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
-  {
     name: 'Water Indoor Plants',
     desc: '**Schedule**: Weekly on Tuesday at 6PM',
     cronSchedule: '0 18 * * 2',
