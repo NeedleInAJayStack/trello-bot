@@ -106,19 +106,6 @@ const tasksScheduledLabelId = '649fc333c93c2d7139afab7f'
 
 const tasksCards = [
   {
-    name: 'Pay Mortgage',
-    desc: '**Schedule**: Monthly on the 25th at 6PM\n' +
-          '\n' +
-          'https://mypennymac.pennymacusa.com/\n' +
-          '\n' +
-          'Venmo request $1,460 from Katelyn\n',
-    cronSchedule: '0 18 25 * *',
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
-  {
     name: 'Input Utilities',
     desc: '**Schedule**: Monthly on the 1st at 6PM\n' +
     '\n' +
@@ -133,7 +120,7 @@ const tasksCards = [
     name: 'Pay Cell Phone',
     desc: '**Schedule**: Monthly on the 1st at 6PM\n' +
           '\n' +
-          '$35 to Mom through PayPal:\n',
+          '$35 to Mom through PayPal\n',
     cronSchedule: '0 18 1 * *',
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
@@ -144,7 +131,12 @@ const tasksCards = [
     name: 'Monthly Money Review',
     desc: '**Schedule**: Monthly on the 28th at 6PM\n' +
       '\n' +
-      'Review your monthly spending in GnuCash',
+      'Review your monthly spending in GnuCash\n' +
+      '\n' +
+      '* Pay Katelyn for car insurance ($131.36/month)\n' +
+      '* Pay Katelyn for shared expenses\n' +
+      '* Charge Katelyn for health insurance ($100/paycheck)\n',
+      '* Charge Katelyn for mortgage\n',
     cronSchedule: '0 18 28 * *',
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
