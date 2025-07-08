@@ -135,7 +135,7 @@ const tasksCards = [
       '\n' +
       '* Pay Katelyn for car insurance ($131.36/month)\n' +
       '* Pay Katelyn for shared expenses\n' +
-      '* Charge Katelyn for health insurance ($100/paycheck)\n',
+      '* Charge Katelyn for health insurance ($100/paycheck)\n' +
       '* Charge Katelyn for mortgage\n',
     cronSchedule: '0 18 28 * *',
     idBoard: tasksBoardId,
