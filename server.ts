@@ -183,8 +183,8 @@ const tasksCards = [
   },
   {
     name: 'Mow Lawn',
-    desc: '**Schedule**: Every Thursday at 6PM from April through October',
-    cronSchedule: '0 18 * 4-10 4',
+    desc: '**Schedule**: Every Saturday at 8AM from April through October',
+    cronSchedule: '0 8 * 4-10 6',
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
     pos: 'top',
@@ -192,10 +192,10 @@ const tasksCards = [
   },
   {
     name: 'Pool Maintenance',
-    desc: '**Schedule**: Every Saturday at noon from May through October\n' +
+    desc: '**Schedule**: Every Sunday at 7PM from May through October\n' +
       '\n' +
       'Perform pool testing, chemical treatments, straining, brushing, and vacuuming',
-    cronSchedule: '0 12 * 5-10 6',
+    cronSchedule: '0 19 * 5-10 7',
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
     pos: 'top',
