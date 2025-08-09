@@ -12,10 +12,11 @@ It's HIGHLY tailored to my particular needs and probably won't be all that valua
 
 1. Install node
 2. Install relevant modules: `npm install`
+3. Compile: `npx tsc`
 3. Create a `.env` with the following vars:
   - `TRELLO_DEV_KEY`
   - `TRELLO_BOT_TOKEN`
-4. Start the process: `node server.js`
+4. Start the process: `node ./dist/server.js`
 
 ### Docker
 
