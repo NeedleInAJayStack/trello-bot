@@ -265,6 +265,16 @@ const tasksCards = [
     idList: tasksToDoListId,
     pos: 'top',
     idLabels: [tasksScheduledLabelId]
+  },
+  {
+    name: "Check Sprinklers",
+    desc: "**Schedule**: Monthly on the 1st Sunday at noon from April through October",
+    cronSchedule: '0 12 * 4-10 0',
+    dayRange: firstWeek,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos:"top",
+    idLabels: [tasksScheduledLabelId]
   }
 ]
 
