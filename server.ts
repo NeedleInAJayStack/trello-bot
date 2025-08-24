@@ -152,15 +152,6 @@ const tasksCards = [
     pos: 'top',
     idLabels: [tasksScheduledLabelId]
   },
-  // {
-  //   name: "Clean Quincy's Cage",
-  //   desc: "**Schedule**: Weekly on Monday at 6PM",
-  //   cronSchedule: "0 18 * * 1",
-  //   idBoard: tasksBoardId,
-  //   idList: tasksToDoListId,
-  //   pos:"top",
-  //   idLabels: [tasksScheduledLabelId]
-  // },
   {
     name: 'Take Out Trash',
     desc: '**Schedule**: Weekly on Monday at 6PM\n' +
@@ -210,6 +201,16 @@ const tasksCards = [
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
     pos: 'top',
+    idLabels: [tasksScheduledLabelId]
+  },
+  {
+    name: "Clean Quincy's Cage",
+    desc: "**Schedule**: Monthly on the 1st Saturday at noon",
+    cronSchedule: '0 12 * * 6',
+    dayRange: firstWeek,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos:"top",
     idLabels: [tasksScheduledLabelId]
   },
   {
