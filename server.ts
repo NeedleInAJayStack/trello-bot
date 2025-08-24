@@ -104,54 +104,7 @@ const tasksScheduledLabelId = '649fc333c93c2d7139afab7f'
 // Cards
 // Relevant card parameters are defined according to Trello post method: https://developers.trello.com/v1.0/reference#cards-2
 
-const tasksCards = [
-  {
-    name: 'Input Utilities',
-    desc: '**Schedule**: Monthly on the 1st at 6PM\n' +
-    '\n' +
-    'Input utility data into PostgreSQL',
-    cronSchedule: '0 18 1 * *',
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
-  {
-    name: 'Pay Cell Phone',
-    desc: '**Schedule**: Monthly on the 1st at 6PM\n' +
-          '\n' +
-          '$35 to Mom through PayPal\n',
-    cronSchedule: '0 18 1 * *',
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
-  {
-    name: 'Monthly Money Review',
-    desc: '**Schedule**: Monthly on the 28th at 6PM\n' +
-      '\n' +
-      'Review your monthly spending in GnuCash\n' +
-      '\n' +
-      '* Pay Katelyn for car insurance ($131.36/month)\n' +
-      '* Pay Katelyn for shared expenses\n' +
-      '* Charge Katelyn for health insurance ($100/paycheck)\n' +
-      '* Charge Katelyn for mortgage\n',
-    cronSchedule: '0 18 28 * *',
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
-  {
-    name: "Brush Gracie's Teeth",
-    desc: '**Schedule**: Weekly on Saturday at noon',
-    cronSchedule: '0 12 * * 6',
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
+const houseCards = [
   {
     name: 'Take Out Trash',
     desc: '**Schedule**: Weekly on Monday at 6PM\n' +
@@ -170,47 +123,6 @@ const tasksCards = [
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
     pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
-  {
-    name: 'Mow Lawn',
-    desc: '**Schedule**: Every Saturday at 8AM from April through October',
-    cronSchedule: '0 8 * 4-10 6',
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
-  {
-    name: 'Pool Maintenance',
-    desc: '**Schedule**: Every Sunday at 7PM from May through October\n' +
-      '\n' +
-      'Perform pool testing, chemical treatments, straining, brushing, and vacuuming',
-    cronSchedule: '0 19 * 5-10 7',
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
-  {
-    name: 'Water Backyard Garden',
-    desc: '**Schedule**: Weekly on Sunday and Wednesday at 6PM from April through October\n' +
-      '\n' +
-      'Water garden near the pool and bamboo',
-    cronSchedule: '0 18 * 4-10 0,3',
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
-  {
-    name: "Clean Quincy's Cage",
-    desc: "**Schedule**: Monthly on the 1st Saturday at noon",
-    cronSchedule: '0 12 * * 6',
-    dayRange: firstWeek,
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos:"top",
     idLabels: [tasksScheduledLabelId]
   },
   {
@@ -265,6 +177,40 @@ const tasksCards = [
     idList: tasksToDoListId,
     pos: 'top',
     idLabels: [tasksScheduledLabelId]
+  }
+]
+
+const yardCards = [
+  {
+    name: 'Mow Lawn',
+    desc: '**Schedule**: Every Saturday at 8AM from April through October',
+    cronSchedule: '0 8 * 4-10 6',
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos: 'top',
+    idLabels: [tasksScheduledLabelId]
+  },
+  {
+    name: 'Pool Maintenance',
+    desc: '**Schedule**: Every Sunday at 7PM from May through October\n' +
+      '\n' +
+      'Perform pool testing, chemical treatments, straining, brushing, and vacuuming',
+    cronSchedule: '0 19 * 5-10 7',
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos: 'top',
+    idLabels: [tasksScheduledLabelId]
+  },
+  {
+    name: 'Water Backyard Garden',
+    desc: '**Schedule**: Weekly on Sunday and Wednesday at 6PM from April through October\n' +
+      '\n' +
+      'Water garden near the pool and bamboo',
+    cronSchedule: '0 18 * 4-10 0,3',
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos: 'top',
+    idLabels: [tasksScheduledLabelId]
   },
   {
     name: "Check Sprinklers",
@@ -278,7 +224,76 @@ const tasksCards = [
   }
 ]
 
-tasksCards.forEach(card => {
+const petCards = [
+  {
+    name: "Brush Gracie's Teeth",
+    desc: '**Schedule**: Weekly on Saturday at noon',
+    cronSchedule: '0 12 * * 6',
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos: 'top',
+    idLabels: [tasksScheduledLabelId]
+  },
+  {
+    name: "Clean Quincy's Cage",
+    desc: "**Schedule**: Monthly on the 1st Saturday at noon",
+    cronSchedule: '0 12 * * 6',
+    dayRange: firstWeek,
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos:"top",
+    idLabels: [tasksScheduledLabelId]
+  }
+]
+
+const miscCards = [
+  {
+    name: 'Input Utilities',
+    desc: '**Schedule**: Monthly on the 1st at 6PM\n' +
+    '\n' +
+    'Input utility data into PostgreSQL',
+    cronSchedule: '0 18 1 * *',
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos: 'top',
+    idLabels: [tasksScheduledLabelId]
+  },
+  {
+    name: 'Pay Cell Phone',
+    desc: '**Schedule**: Monthly on the 1st at 6PM\n' +
+          '\n' +
+          '$35 to Mom through PayPal\n',
+    cronSchedule: '0 18 1 * *',
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos: 'top',
+    idLabels: [tasksScheduledLabelId]
+  },
+  {
+    name: 'Monthly Money Review',
+    desc: '**Schedule**: Monthly on the 28th at 6PM\n' +
+      '\n' +
+      'Review your monthly spending in GnuCash\n' +
+      '\n' +
+      '* Pay Katelyn for car insurance ($131.36/month)\n' +
+      '* Pay Katelyn for shared expenses\n' +
+      '* Charge Katelyn for health insurance ($100/paycheck)\n' +
+      '* Charge Katelyn for mortgage\n',
+    cronSchedule: '0 18 28 * *',
+    idBoard: tasksBoardId,
+    idList: tasksToDoListId,
+    pos: 'top',
+    idLabels: [tasksScheduledLabelId]
+  }
+]
+
+const allCards = [
+  ...houseCards,
+  ...yardCards,
+  ...petCards,
+  ...miscCards
+]
+allCards.forEach(card => {
   cron.schedule(card.cronSchedule, async () => {
     try {
       await staticScheduleCardFunc(card)
