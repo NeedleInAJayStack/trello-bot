@@ -201,17 +201,6 @@ const tasksCards = [
     pos: 'top',
     idLabels: [tasksScheduledLabelId]
   },
-  // {
-  //   name: "Meal Plan and Groceries",
-  //   desc: "**Schedule**: Weekly on Sunday at noon\n"+
-  //     "\n"+
-  //     "Plan meals for the week and buy groceries",
-  //   cronSchedule: "0 12 * * 0",
-  //   idBoard: tasksBoardId,
-  //   idList: tasksToDoListId,
-  //   pos:"top",
-  //   idLabels: [tasksScheduledLabelId]
-  // },
   {
     name: 'Water Backyard Garden',
     desc: '**Schedule**: Weekly on Sunday and Wednesday at 6PM from April through October\n' +
@@ -223,47 +212,6 @@ const tasksCards = [
     pos: 'top',
     idLabels: [tasksScheduledLabelId]
   },
-  // {
-  //   name: "Clean Bedroom",
-  //   desc: "**Schedule**: Monthly on the 1st Saturday at noon\n"+
-  //     "\n"+
-  //     "Check the following and perform as needed:\n"+
-  //     "\n"+
-  //     "* Pick up clutter\n"+
-  //     "* Dust\n"+
-  //     "* Wash sheets\n"+
-  //     "* Sweep/Vacuum",
-  //   cronSchedule: "0 12 * * 6",
-  //   dayRange: firstWeek,
-  //   idBoard: tasksBoardId,
-  //   idList: tasksToDoListId,
-  //   pos:"top",
-  //   idLabels: [tasksScheduledLabelId]
-  // },
-  // {
-  //   name: "Clean Kitchen",
-  //   desc: "**Schedule**: Monthly on the 2nd Saturday at noon\n"+
-  //     "\n"+
-  //     "Check the following and perform as needed:\n"+
-  //     "\n"+
-  //     "* Do dishes\n"+
-  //     "* Wipe countertops\n"+
-  //     "* Wipe cupboards\n"+
-  //     "* Wipe/dust appliances\n"+
-  //     "* Clean stovetop\n"+
-  //     "* Clean microwave\n"+
-  //     "* Clean sink\n"+
-  //     "* Clean fridge\n"+
-  //     "* Shake rug (outside)\n"+
-  //     "* Sweep/Vacuum\n"+
-  //     "* Mop",
-  //   cronSchedule: "0 12 * * 6",
-  //   dayRange: secondWeek,
-  //   idBoard: tasksBoardId,
-  //   idList: tasksToDoListId,
-  //   pos:"top",
-  //   idLabels: [tasksScheduledLabelId]
-  // },
   {
     name: 'Clean Bathrooms',
     desc: '**Schedule**: Monthly on the 3nd Saturday at noon\n' +
