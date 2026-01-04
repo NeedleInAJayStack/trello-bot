@@ -262,7 +262,7 @@ const miscCards = [
     name: 'Pay Cell Phone',
     desc: '**Schedule**: Monthly on the 1st at 6PM\n' +
           '\n' +
-          '$35 to Mom through PayPal\n',
+          '$72.50 to Mom through PayPal\n',
     cronSchedule: '0 18 1 * *',
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
@@ -275,10 +275,10 @@ const miscCards = [
       '\n' +
       'Review your monthly spending in GnuCash\n' +
       '\n' +
-      '* Pay Katelyn for car insurance ($131.36/month)\n' +
-      '* Pay Katelyn for shared expenses\n' +
+      '* Charge Katelyn for shared expenses\n' +
       '* Charge Katelyn for health insurance ($100/paycheck)\n' +
-      '* Charge Katelyn for mortgage\n',
+      '* Charge Katelyn for mortgage\n' +
+      '* Trade Katelyn HSA for car insurance ($131.36/month)\n',
     cronSchedule: '0 18 28 * *',
     idBoard: tasksBoardId,
     idList: tasksToDoListId,
