@@ -234,16 +234,6 @@ const petCards = [
     pos: 'top',
     idLabels: [tasksScheduledLabelId]
   },
-  {
-    name: "Clean Quincy's Cage",
-    desc: "**Schedule**: Monthly on the 1st Saturday at noon",
-    cronSchedule: '0 12 * * 6',
-    dayRange: firstWeek,
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos:"top",
-    idLabels: [tasksScheduledLabelId]
-  }
 ]
 
 const miscCards = [
