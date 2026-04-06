@@ -224,17 +224,7 @@ const yardCards = [
   }
 ]
 
-const petCards = [
-  {
-    name: "Brush Gracie's Teeth",
-    desc: '**Schedule**: Weekly on Saturday at noon',
-    cronSchedule: '0 12 * * 6',
-    idBoard: tasksBoardId,
-    idList: tasksToDoListId,
-    pos: 'top',
-    idLabels: [tasksScheduledLabelId]
-  },
-]
+const petCards = []
 
 const miscCards = [
   {
