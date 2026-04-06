@@ -1,6 +1,6 @@
-import http = require('http')
-import cron = require('node-cron') // Doc here: https://www.npmjs.com/package/node-cron
-import axios = require('axios')
+import * as http from 'node:http'
+import * as cron from 'node-cron' // Doc here: https://www.npmjs.com/package/node-cron
+import * as axios from 'axios'
 
 // HTTP SERVER
 const serverStartTime = new Date()
@@ -42,12 +42,6 @@ if (jaysTrelloBotToken === undefined || jaysTrelloBotToken === '') {
   throw new Error('TRELLO_BOT_TOKEN is not set.')
 }
 
-interface Card {
-  id: string
-  name: string
-  idList: string[]
-}
-
 const httpClient = axios.default
 const axoisConfig = {
   params: {
@@ -58,7 +52,7 @@ const axoisConfig = {
 
 // This function tries to find the card to be created by name. If it doesn't exist, it creates it. If it does, but in
 // a different list, it moves it, and if it exists in the same list, it is commented on.
-const staticScheduleCardFunc = async (newCard): Promise<void> => {
+const staticScheduleCardFunc = async (newCard: CardDef): Promise<void> => {
   const date = new Date()
   if (newCard.dayRange === undefined || newCard.dayRange.indexOf(date.getDate()) > -1) { // Only proceed if dayRange is undefined or today is within the range.
     const cardsRes = await httpClient.get(`https://api.trello.com/1/boards/${newCard.idBoard}/cards/`, axoisConfig)
@@ -104,7 +98,7 @@ const tasksScheduledLabelId = '649fc333c93c2d7139afab7f'
 // Cards
 // Relevant card parameters are defined according to Trello post method: https://developers.trello.com/v1.0/reference#cards-2
 
-const houseCards = [
+const houseCards: CardDef[] = [
   {
     name: 'Take Out Trash',
     desc: '**Schedule**: Weekly on Monday at 6PM\n' +
@@ -180,7 +174,7 @@ const houseCards = [
   }
 ]
 
-const yardCards = [
+const yardCards: CardDef[] = [
   {
     name: 'Mow Lawn',
     desc: '**Schedule**: Every Saturday at 8AM from April through October',
@@ -224,9 +218,9 @@ const yardCards = [
   }
 ]
 
-const petCards = []
+const petCards: CardDef[] = []
 
-const miscCards = [
+const miscCards: CardDef[] = [
   {
     name: 'Input Utilities',
     desc: '**Schedule**: Monthly on the 1st at 6PM\n' +
@@ -267,7 +261,7 @@ const miscCards = [
   }
 ]
 
-const allCards = [
+const allCards: CardDef[] = [
   ...houseCards,
   ...yardCards,
   ...petCards,
@@ -282,3 +276,20 @@ allCards.forEach(card => {
     }
   })
 })
+
+interface Card {
+  id: string
+  name: string
+  idList: string
+}
+
+interface CardDef {
+  name: string
+  desc: string
+  cronSchedule: string
+  dayRange?: number[]
+  idBoard: string
+  idList: string
+  pos: string
+  idLabels: string[]
+}
